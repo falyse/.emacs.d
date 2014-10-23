@@ -1,4 +1,4 @@
-;; Time-stamp: <2014-07-15 08:28:39 cfricano>
+;; Time-stamp: <2014-10-23 14:37:57 cfricano>
 ;; Original Author: Kaushal Modi
 ;; Modified By: Courtney Schmitt
 
@@ -84,7 +84,7 @@
 (require 'setup-stripe-buffer)  ;; stripe-buffer
 (require 'setup-visual-regexp)  ;; visual-regexp
 (require 'setup-workgroups)  ;; workgroups2
-(require 'setup-yasnippet)  ;; yasnippet
+;;cef (require 'setup-yasnippet)  ;; yasnippet
 
 ;; Languages
 (require 'setup-verilog)
