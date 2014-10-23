@@ -1,0 +1,48 @@
+# -*- mode: snippet -*-
+# contributor: Kaushal Modi
+# name: test class
+# key: testcl
+# expand-env: ((yas-indent-line 'auto) (yas-also-auto-indent-first-line t) (yas-wrap-around-region t))
+# --
+class ${1:TEST_NAME} extends talise_base_test;
+   \`uvm_component_utils($1)
+
+   function new(string name = "$1",
+                uvm_component parent = null);
+      super.new(name, parent);
+   endfunction // new
+
+   virtual function void build_phase(uvm_phase phase);
+      super.build_phase(phase);
+
+      $0// set_inst_override_by_type
+      //   (
+      //    .relative_inst_path("env.vsqr.vseq.*"),
+      //    .original_type(adc_random_seq::get_type()),
+      //    .override_type(adc_fileread_seq::get_type()));
+
+      // // Modification of any cfg.* item if any has to happen after this line
+      // //-BEGIN-cfg.*-MODIFICATION------------------------------------------------
+
+      // // Modification of any cfg.* item has to happen before this line
+      // //-END-cfg.*-MODIFICATION--------------------------------------------------
+
+      // // Update "cfg" field in "env" in config_db
+      // uvm_config_db#(talise_cfg)::set
+      //   ( .cntxt(this), .inst_name("env"),
+      //     .field_name("cfg"), .value(cfg));
+   endfunction : build_phase
+
+   // Use main_phase to perform things that are time specific
+   virtual task main_phase(uvm_phase phase);
+      begin
+         phase.raise_objection(this, "At the beginning of main phase.");
+         super.main_phase(phase);
+
+         // DO SOMETHING
+
+         phase.drop_objection(this);
+      end
+   endtask : main_phase
+
+endclass : $1

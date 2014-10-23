@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# contributor: Kaushal Modi
+# name: always_ff posedge, no reset
+# key: alp
+# expand-env: ((yas-indent-line 'auto) (yas-also-auto-indent-first-line t) (yas-wrap-around-region t))
+# --
+always_ff @ (posedge ${1:clk}) begin
+  $0
+end // always_ff @ (posedge $1)

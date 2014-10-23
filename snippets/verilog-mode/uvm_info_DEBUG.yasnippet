@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# contributor: Kaushal Modi
+# name: `uvm_info DEBUG
+# key: uvm_id
+# expand-env: ((yas-indent-line 'auto) (yas-also-auto-indent-first-line t) (yas-wrap-around-region t))
+# --
+`uvm_info("${1:LAME_DEBUG}", ${2:$sformatf("%0d", $0)}, UVM_MEDIUM)

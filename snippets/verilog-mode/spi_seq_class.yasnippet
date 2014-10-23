@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# contributor: Kaushal Modi
+# name: spi sequence class
+# key: spiseq
+# expand-env: ((yas-indent-line 'auto) (yas-also-auto-indent-first-line t) (yas-wrap-around-region t))
+# --
+class ${1:SPI_SEQ_NAME_seq} extends spi_master_reg_seq;
+   \`uvm_object_utils($1)
+
+   function new(string name = "$1");
+      super.new(name);
+   endfunction // new
+
+   virtual task body();
+     begin
+        \`reg_write("$0", )
+     end
+   endtask : body
+endclass : $1

@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# contributor: Kaushal Modi
+# name: always_ff posedge, active high sync reset
+# key: alpp
+# expand-env: ((yas-indent-line 'auto) (yas-also-auto-indent-first-line t) (yas-wrap-around-region t))
+# --
+always_ff @ (posedge ${1:clk} or posedge ${2:reset}) begin
+  if ($2) begin
+    ${3:signal} <= ${4:'d0};
+  end else begin
+    $3 <= $0;
+  end
+end // always_ff @ (posedge $1 or posedge $2)

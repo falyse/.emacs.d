@@ -1,0 +1,13 @@
+;;; soft-stone-theme-autoloads.el --- automatically extracted autoloads
+;;
+;;; Code:
+
+
+(provide 'soft-stone-theme-autoloads)
+;; Local Variables:
+;; version-control: never
+;; no-byte-compile: t
+;; no-update-autoloads: t
+;; coding: utf-8
+;; End:
+;;; soft-stone-theme-autoloads.el ends here

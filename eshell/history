@@ -1,0 +1,10 @@
+source ~/common/project.cfg 
+sourcerc
+source ~/.cshrc
+./setup-key-bindings
+la
+ls
+ll
+ls
+ls
+ll

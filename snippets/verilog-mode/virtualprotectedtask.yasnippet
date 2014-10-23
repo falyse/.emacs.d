@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# contributor: Kaushal Modi
+# name: virtual protected task
+# key: taskvp
+# expand-env: ((yas-indent-line 'auto) (yas-also-auto-indent-first-line t) (yas-wrap-around-region t))
+# --
+virtual protected task ${1:TASK_NAME} (${2:uvm_phase phase});
+   begin
+      $0
+   end
+endtask : $1
