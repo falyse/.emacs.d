@@ -1,4 +1,4 @@
-;; Time-stamp: <2014-10-24 12:25:52 cfricano>
+;; Time-stamp: <2014-10-24 13:02:44 cfricano>
 ;; Original Author: Kaushal Modi
 ;; Modified By: Courtney Schmitt
 
@@ -45,6 +45,7 @@
     multi-term  ;; Better management of multiple terminals
     org ;; Get the latest org-mode package from Melpa
     popwin ;; Open windows like *Help*, *Completions*, etc in minibuffer
+    pretty-mode ;; Replace some text with equivalent symbols
     projectile  ;; Project management
     rainbow-delimiters  ;; Highlight nested parens in a different color by depth
     rainbow-mode  ;; Show color names as the color they represent
@@ -92,6 +93,7 @@
 ;;ces (require 'setup-multiple-cursors)  ;; multiple-cursors
 (require 'setup-org)  ;; org
 (require 'setup-popwin)  ;; popwin
+(require 'setup-pretty-mode)  ;; pretty-mode
 (require 'setup-projectile)  ;; projectile
 ;;ces (require 'setup-server)  ;; emacs server  ;; ces using emacs --daemon instead
 ;;ces (require 'setup-smart-compile)  ;; smart-compile
@@ -122,6 +124,7 @@
 ;;ces (require 'setup-desktop)  ;; desktop session save/restore
 (require 'setup-misc)
 (require 'setup-shell)  ;; ces - customize built in shell to behave more like actual terminal
+(require 'setup-registers)
 
 
 ;; NOTE: Load below ONLY after loading all the packages
