@@ -1,4 +1,4 @@
-;; Time-stamp: <2014-10-06 08:56:18 cfricano>
+;; Time-stamp: <2014-10-24 09:05:05 cfricano>
 
 ;; Org Mode
 
@@ -20,6 +20,32 @@
 (setq org-enforce-todo-dependencies t) ;; block entries from changing state to DONE
                           ;; while they have children that are not DONE
                           ;; Source: http://orgmode.org/manual/TODO-dependencies.html
+
+(setq org-agenda-archives-mode nil ;; required in org 8.0+
+      org-agenda-skip-comment-trees nil
+      org-agenda-skip-function nil
+      org-src-fontify-natively t ;; fontify code in code blocks
+      org-pretty-entities t ;; Display entities like \tilde, \alpha, etc in UTF-8 characters
+      org-pretty-entities-include-sub-superscripts nil ;; Display entities like \tilde, \alpha, etc in UTF-8 characters
+      org-export-with-smart-quotes t
+      ;; active single key command execution when at beginning of a headline
+      org-use-speed-commands t
+      ;; Allow _ and ^ characters to sub/super-script strings but only when followed by braces
+      org-use-sub-superscripts         '{}
+      org-export-with-sub-superscripts '{}
+      org-completion-use-ido t ;; use ido for auto completion
+      org-return-follows-link t ;; Hitting <RET> while on a link follows the link
+      )
+
+;; change the default app for opening pdf files from org
+;; Source: http://stackoverflow.com/questions/8834633/how-do-i-make-org-mode-open-pdf-files-in-evince
+(eval-after-load "org"
+  '(progn
+     (add-to-list 'org-src-lang-modes '("systemverilog" . verilog))
+     (add-to-list 'org-src-lang-modes '("dot"           . graphviz-dot))
+     ;; Change .pdf association directly within the alist
+     (setcdr (assoc "\\.pdf\\'" org-file-apps) "acroread %s")))
+
 ;;ces ;; Capture
 ;;ces (setq org-capture-templates
 ;;ces       '(
@@ -30,6 +56,64 @@
 ;;ces         ("u" "UVM/System Verilog Notes" entry (file "~/org/uvm.org")
 ;;ces          "\n* %?\n  Context:\n    %i\n  Entered on %U")
 ;;ces         ))
+
+;; Diagrammmms
+;; Source: http://pages.sachachua.com/.emacs.d/Sacha.html
+(setq org-ditaa-jar-path (concat user-emacs-directory "/ditaa/ditaa0_9.jar"))
+(setq org-plantuml-jar-path (concat user-emacs-directory "/plantuml/plantuml.7999.jar"))
+
+(defun my-org-confirm-babel-evaluate (lang body)
+  (and (not (string= lang "ditaa"))    ;; don't ask for ditaa
+       (not (string= lang "plantuml")) ;; don't ask for plantuml
+       (not (string= lang "latex"))    ;; don't ask for latex
+       (not (string= lang "dot"))      ;; don't ask for graphviz
+       ))
+(setq org-confirm-babel-evaluate 'my-org-confirm-babel-evaluate)
+(setq org-confirm-elisp-link-function 'yes-or-no-p)
+
+(defun modi/org-export-to-html-txt-pdf ()
+  "Export the org file to multiple formats."
+  (interactive)
+  (org-html-export-to-html)
+  (org-ascii-export-to-ascii)
+  (org-latex-export-to-pdf))
+
+;; org-agenda related functions
+;; http://sachachua.com/blog/2013/01/emacs-org-task-related-keyboard-shortcuts-agenda/
+(defun sacha/org-agenda-done (&optional arg)
+  "Mark current TODO as done.
+This changes the line at point, all other lines in the agenda referring to
+the same tree node, and the headline of the tree node in the Org-mode file."
+  (interactive "P")
+  (org-agenda-todo "DONE"))
+
+(defun sacha/org-agenda-mark-done-and-add-followup ()
+  "Mark the current TODO as done and add another task after it.
+Creates it at the same level as the previous task, so it's better to use
+this with to-do items than with projects or headings."
+  (interactive)
+  (org-agenda-todo "DONE")
+  (org-agenda-switch-to)
+  (org-capture 0 "t")
+  (org-metadown 1)
+  (org-metaright 1))
+
+(defun sacha/org-agenda-new ()
+  "Create a new note or task at the current agenda item.
+Creates it at the same level as the previous task, so it's better to use
+this with to-do items than with projects or headings."
+  (interactive)
+  (org-agenda-switch-to)
+  (org-capture 0))
+
+(add-hook 'org-agenda-mode-hook
+          (lambda ()
+            ;; Override the key definition for org-exit
+            (define-key org-agenda-mode-map "x" 'sacha/org-agenda-done)
+            (define-key org-agenda-mode-map "X" 'sacha/org-agenda-mark-done-and-add-followup)
+            ;; New key assignment
+            (define-key org-agenda-mode-map "N" 'sacha/org-agenda-new)))
+
 
 ;;-------------------
 ;;ces additions

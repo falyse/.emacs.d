@@ -1,11 +1,14 @@
-;; Time-stamp: <2013-12-02 17:06:40 kmodi>
+;; Time-stamp: <2014-10-24 09:24:56 cfricano>
 
 ;; Printing
 ;; Source: http://www.opensource.apple.com/source/emacs/emacs-41/emacs/lisp/ps-print.el
 ;; http://www.emacswiki.org/emacs/PsPrintPackage-23
 
-(set-fontset-font
- nil '(#x0250 . #x02af) (font-spec :family "DejaVu Sans Mono"))
+;; Don't set the fonts if emacs is launched in terminal mode or no-window mode,
+;; using "emacs -nw". In that case the value of `window-system' is nil.
+;; Source: http://stackoverflow.com/questions/5795451/how-to-detect-that-emacs-is-in-terminal-mode
+(if window-system
+    (set-fontset-font nil '(#x0250 . #x02af) (font-spec :family "DejaVu Sans Mono")))
 
 (setq ps-paper-type 'letter
       ps-print-color-p 'black-white

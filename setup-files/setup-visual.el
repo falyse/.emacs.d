@@ -1,6 +1,10 @@
-;; Time-stamp: <2014-06-18 11:02:01 cschmitt>
+;; Time-stamp: <2014-10-24 11:31:02 cfricano>
 
 ;; Set up the looks of emacs
+
+(setq default-font-size-pt 10 ;; default font size
+      dark-theme          nil ;; initialize dark-theme var
+      )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; MENU/TOOL/SCROLL BARS
@@ -20,6 +24,8 @@
 ;; THEME and COLORS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(setq default-theme       'light)
+
 ;; zenburn
 (defun zenburn ()
   "Activate zenburn theme."
@@ -31,7 +37,8 @@
   (disable-theme 'sanityinc-solarized-light)
   (disable-theme 'sanityinc-tomorrow-blue)
   (disable-theme 'soft-stone)
-  (load-theme    'zenburn t))
+  (load-theme    'zenburn t)
+  )
 
 ;; soft-stone
 (defun light ()
@@ -82,13 +89,29 @@
 ;;  ;; (setq ansi-color-map (ansi-color-make-color-map)) 
   )
 
+;; Load the theme ONLY after the frame has finished loading (needed especially
+;; when running emacs in daemon mode)
+;; Source: https://github.com/Bruce-Connor/smart-mode-line/issues/84#issuecomment-46429893
+(add-to-list 'after-make-frame-functions
+             (lambda (&rest frame)
+               (funcall default-theme)))
+
+(add-hook 'after-init-hook
+          '(lambda()
+             ;; Frame title bar format
+             ;; If buffer-file-name exists, show it;
+             ;; else if you are in dired mode, show the directory name
+             ;; else show only the buffer name (*scratch*, *Messages*, etc)
+             ;; Append the value of PRJ_NAME env var to the above.
+             (setq frame-title-format
+                   (list '(buffer-file-name "%f"
+                                            (dired-directory dired-directory "%b"))
+                         " [" (getenv "PRJ_NAME") "]"))))
+
 (setq global-font-lock-mode t ;; enable font-lock or syntax highlighting globally
       font-lock-maximum-decoration t ;; use the maximum decoration level available for color highlighting
       )
 
-;; Set the color theme
-;(dark)  ;; Use dark theme
-(light)  ;; Use light theme
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Rainbow parens
@@ -109,6 +132,10 @@
 ;; So a 10pt font size is equal to 100 in internal font size value.
 (set-face-attribute 'default nil :height (* font-size-pt 10))
 
+;; Below custom function are not required usually as the default C-x C-0/-/=
+;; bindings do excellent job. The default binding though does not change the
+;; font sizes for the text outside the buffer, example in mode-line.
+;; Below functions change the font size in those areas too.
 (defun font-size-incr ()
   "Increase font size by 1 pt"
   (interactive)
@@ -174,9 +201,13 @@
   "change cursor color according to some minor modes."
   ;; set-cursor-color is somewhat costly, so we only call it when needed:
   (let ((color
-         (if buffer-read-only "yellow"
+         (if buffer-read-only
+             ;; Color when the buffer is read-only
+             (progn (if dark-theme "yellow" "dark orange"))
+           ;; Color when the buffer is writeable but overwrite mode is on
            (if overwrite-mode "red"
-             (if dark-theme "white" "dark orange")))))
+             ;; Color when the buffer is writeable but overwrite mode if off
+             (if dark-theme "white" "gray")))))
     (unless (and
              (string= color hcz-set-cursor-color-color)
              (string= (buffer-name) hcz-set-cursor-color-buffer))
@@ -187,17 +218,46 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Frame title bar format
-;; If buffer-file-name exists, show it;
-;; else if you are in dired mode, show the directory name
-;; else show only the buffer name (*scratch*, *Messages*, etc)
-;; Append the value of PRJ_NAME env var to the above.
+;; Presentation mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(setq project-name (getenv "PRJ_NAME"))
-(setq frame-title-format
-      (list '(buffer-file-name "%f"
-                               (dired-directory dired-directory "%b"))
-            " [" project-name "]"))
+(setq presentation-mode-enabled nil)
+
+(defun presentation-mode ()
+  "Set frame size, theme and fonts suitable for presentation."
+  (interactive)
+  (setq font-size-pt 13)
+  (set-face-attribute 'default nil :height (* font-size-pt 10))
+  (set-frame-position (selected-frame) 0 0) ;; pixels x y from upper left
+  (set-frame-size (selected-frame) 80 25)  ;; rows and columns w h
+  (funcall default-light-theme) ;; change to default light theme
+  (delete-other-windows)
+  (setq presentation-mode-enabled t)
+  )
+
+(defun coding-zombie-mode ()
+  "Revert to default coding mode."
+  (interactive)
+  (setq font-size-pt default-font-size-pt)
+  (set-face-attribute 'default nil :height (* font-size-pt 10))
+  (full-screen-center)
+  (funcall default-theme) ;; change to default theme
+  (split-window-right)
+  (setq presentation-mode-enabled nil)
+  )
+
+(defun toggle-presentation-mode ()
+  "Toggle between presentation and default mode."
+  (interactive)
+  (if presentation-mode-enabled
+      (coding-zombie-mode)
+    (presentation-mode)))
+
+;; Coloring regions that have ANSI color codes in them
+;; http://unix.stackexchange.com/questions/19494/how-to-colorize-text-in-emacs
+(defun ansi-color-apply-on-region-int (beg end)
+  "Colorize using the ANSI color codes."
+  (interactive "r")
+  (ansi-color-apply-on-region beg end))
 
 
 (setq setup-visual-loaded t)

@@ -1,4 +1,4 @@
-;; Time-stamp: <2014-01-23 09:32:03 cschmitt>
+;; Time-stamp: <2014-10-23 16:03:19 cfricano>
 
 ;; Functions related to editing text in the buffer
 
@@ -103,22 +103,11 @@ Uses `current-date-time-format' for the formatting the date/time."
        (insert (format-time-string current-date-time-format (current-time)))
        (insert "\n"))
 
-;; insert time
-(defvar current-time-format "%a %H:%M:%S"
-  "Format of date to insert with `insert-current-time' func.
-Note the weekly scope of the command's precision.")
-(defun insert-current-time ()
-  "insert the current time (1-week scope) into the current buffer."
-       (interactive)
-       (insert (format-time-string current-time-format (current-time)))
-       (insert "\n"))
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Align = signs
+;; Align
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Source: http://stackoverflow.com/questions/6217153/aligning-or-prettifying-code-in-emacs
-
 ;; Source: http://stackoverflow.com/questions/3633120/emacs-hotkey-to-align-equal-signs
 (defun align-to-equals (begin end)
   "Align region to equal signs"
@@ -139,16 +128,14 @@ Note the weekly scope of the command's precision.")
   "Align text columns"
   (interactive "r")
   ;; align-regexp syntax:  align-regexp (beg end regexp &optional group spacing repeat)
-  (align-regexp begin end "\\(\\s-+\\)[a-z=(),?':`]" 1 1 t)
+  (align-regexp begin end "\\(\\s-+\\)[a-z=(),?':`\.{}]" 1 1 t)
   (indent-region begin end) ;; ident the region correctly after alignment
   )
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Replace an emacs lisp expression (s-expression aka sexp) with its result
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; http://stackoverflow.com/questions/3035337/in-emacs-can-you-evaluate-an-emacs-lisp-expression-and-replace-it-with-the-resul
 (defun eval-and-replace-last-sexp ()
+  "Replace an emacs lisp expression (s-expression aka sexp) with its result"
   (interactive)
   (let ((value (eval (preceding-sexp))))
     (kill-sexp -1)
@@ -158,24 +145,64 @@ Note the weekly scope of the command's precision.")
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Toggle comment on current line
+;; Toggle comment on current line or selected region
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; http://stackoverflow.com/questions/9688748/emacs-comment-uncomment-current-line
-(defun toggle-comment-on-line ()
-  "comment or uncomment current line, and go to the next line"
+(defun toggle-comment-on-line-or-region ()
+  "comment or uncomment current line or selected region , and go to the next line"
   (interactive)
-  (comment-or-uncomment-region (line-beginning-position) (line-end-position))
+  (if (region-active-p)
+      (comment-or-uncomment-region (region-beginning) (region-end))
+    (comment-or-uncomment-region (line-beginning-position) (line-end-position)))
   (next-line))
 
+;; Make `kill-whole-line' indentation aware
+;; https://github.com/lunaryorn/stante-pede/blob/master/init.el
+(defun smart-kill-whole-line (&optional arg)
+  "Kill whole line and move back to indentation.
+Kill the whole line with function `kill-whole-line' and then move
+`back-to-indentation'."
+  (interactive "p")
+  (kill-whole-line arg)
+  (back-to-indentation))
 
-(setq setup-editing-loaded t)
+(defun modi/smart-open-line ()
+  "Move the current line down if there are no word chars between the start of line
+and the cursor. Else, insert empty line after the current line."
+  (interactive)
+  ;; Get the substring from start of line to current cursor position
+  (setq str-before-point (buffer-substring (line-beginning-position) (point)))
+  ;; (message "%s" str-before-point)
+  (if (not (string-match "\\w" str-before-point))
+      (progn (newline-and-indent)
+             ;; (open-line 1)
+             (previous-line)
+             (indent-relative-maybe))
+    (progn (move-end-of-line nil)
+           (newline-and-indent))))
+
+(defun pull-up-line ()
+  "Join the following line onto the current one (analogous to `C-e', `C-d')"
+  (interactive)
+  (join-line -1))
+
+;; Enable narrowing
+(put 'narrow-to-region 'disabled nil)
+(put 'narrow-to-defun  'disabled nil)
+(put 'narrow-to-page   'disabled nil)
+
+;; zap-to-char
+;; Source: https://github.com/purcell/emacs.d/blob/master/lisp/init-editing-utils.el
+(autoload 'zap-up-to-char "misc" "Kill up to, but not including ARGth occurrence of CHAR.")
+
+(setq setup-editing-loaded t) ;; required in setup-perl
 (provide 'setup-editing)
 
 
 ;; TIPS
 
 ;; (1) Commented new line
-;; `M-j' or `C-M-j' - `comment-indent-new-line'
+;; `M-j' - `comment-indent-new-line'
 ;; This creates a commented new line; useful when writing multiline comments
 ;; like this one without having to manually type in the comment characters.
 

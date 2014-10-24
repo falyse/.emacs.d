@@ -1,4 +1,4 @@
-;; Time-stamp: <2013-12-18 12:55:03 kmodi>
+;; Time-stamp: <2014-10-23 15:49:09 cfricano>
 
 ;; Drag Stuff
 ;; Source: https://github.com/rejeep/drag-stuff
@@ -6,6 +6,19 @@
 (require 'drag-stuff)
 
 (setq drag-stuff-global-mode t)
+
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ;; Solution posted by drag-stuff dev on posting an issue I faced,
+    ;; https://github.com/rejeep/drag-stuff.el/issues/4
+    (defvar drag-stuff-hax nil)
+    (add-hook 'drag-stuff-before-drag-hook
+              (lambda (when (and (region-active-p) (zerop (current-column)))
+                  (backward-char 1)
+                  (setq drag-stuff-hax t))))
+    (add-hook 'drag-stuff-after-drag-hook
+              (lambda (when drag-stuff-hax
+                  (forward-char 1)
+                  (setq drag-stuff-hax nil))))
 
 
 (setq setup-drag-stuff-loaded t)

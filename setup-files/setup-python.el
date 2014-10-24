@@ -1,9 +1,6 @@
-;; Time-stamp: <2013-12-02 17:07:04 kmodi>
+;; Time-stamp: <2014-10-24 09:37:49 cfricano>
 
 ;;Python
-
-(add-to-list 'load-path "~/.emacs.d/python-mode.el-6.1.1/")
-(setq py-install-directory "~/.emacs.d/python-mode.el-6.1.1/")
 
 (require 'python-mode)
 

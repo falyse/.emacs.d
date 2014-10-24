@@ -1,4 +1,4 @@
-;; Time-stamp: <2013-12-11 15:11:34 kmodi>
+;; Time-stamp: <2014-10-24 09:52:15 cfricano>
 
 ;; Source: http://www.emacswiki.org/emacs/SearchAtPoint
 
@@ -96,6 +96,60 @@ searches all buffers."
       (remove-if-not 'buffer-file-name (buffer-list))))
    regexp))
 
+;; Anzu mode
+;; Source: https://github.com/syohex/emacs-anzu
+(require 'region-bindings-mode)
+(require 'anzu)
+
+(global-anzu-mode +1)
+;; color of search count shown in the mode-line by anzu
+(set-face-attribute 'anzu-mode-line nil
+                    :foreground "lightblue" :weight 'bold)
+(setq anzu-mode-lighter                "" ;; String to show in the mode-line, default is " Anzu"
+      anzu-search-threshold            1000 ;; anzu stops searching after reaching 1000 matches
+      anzu-replace-to-string-separator " => "
+      )
+
+;; Visual Regular Expression search/replace
+(require 'visual-regexp)
+(setq vr--feedback-limit nil)
+
+;; Inspired from http://www.emacswiki.org/emacs/QueryExchange and definition of
+;; `query-replace-regexp' from replace.el
+(defun query-exchange (string-1 string-2 &optional delimited start end)
+  "Exchange string-1 and string-2 interactively.
+The user is prompted at each instance like query-replace. Exchanging
+happens within a region if one is selected."
+  (interactive
+   (let ((common
+	  (query-replace-read-args
+	   (concat "Query replace"
+		   (if current-prefix-arg " word" "")
+		   " regexp"
+		   (if (and transient-mark-mode mark-active) " in region" ""))
+	   t)))
+     (list (nth 0 common) (nth 1 common) (nth 2 common)
+	   ;; These are done separately here
+	   ;; so that command-history will record these expressions
+	   ;; rather than the values they had this time.
+	   (if (and transient-mark-mode mark-active)
+	       (region-beginning))
+	   (if (and transient-mark-mode mark-active)
+	       (region-end)))))
+
+  (perform-replace
+   (concat "\\(" string-1 "\\)\\|" string-2)
+   '(replace-eval-replacement replace-quote
+                              (if (match-string 1) string-2 string-1))
+   t t delimited nil nil start end))
+
+;; Swoop
+;; https://github.com/ShingoFukuyama/emacs-swoop
+(require 'swoop)
+
+;; Source: https://github.com/purcell/emacs.d/blob/master/lisp/init-isearch.el
+;; DEL during isearch should edit the search string, not jump back to the previous result
+(define-key isearch-mode-map [remap isearch-delete-char] 'isearch-del-char)
 
 (setq setup-search-loaded t)
 (provide 'setup-search)

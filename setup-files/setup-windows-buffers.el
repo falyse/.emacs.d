@@ -1,7 +1,6 @@
-;; Time-stamp: <2014-01-21 10:05:34 cschmitt>
+;; Time-stamp: <2014-10-24 11:09:43 cfricano>
 
 ;; Functions to manipulate windows and buffers
-
 
 ;; Source: http://www.emacswiki.org/emacs/WinnerMode
 (winner-mode 1) ;; Enable winner mode
@@ -19,14 +18,16 @@
 ;; Source: http://www.emacswiki.org/emacs/RecentFiles
 (require 'recentf)
 (recentf-mode 1)
-(setq recentf-max-menu-items 50)
+(setq recentf-max-menu-items 200)
+
+;; ------------------------------------------
 
 ;; Set initial frame size and position
 ;; fills full screen of the left monitor
 (setq initial-frame-alist
       '((top    . 1)
         (left   . 1)
-        (width  . 238)
+        (width  . 235)
         (height . 71)))
 ;; (add-to-list 'default-frame-alist '(left   . 0))
 ;; (add-to-list 'default-frame-alist '(top    . 0))
@@ -131,15 +132,16 @@ Useful when you do `C-x 3` when you intended to do `C-x 2` and vice-versa."
           (kill-new file-name))
       (error "Buffer not visiting a file"))))
 
-(defun reload ()
+(defun reload-init ()
   "Do load-file of the emacs config file"
   (interactive)
   (load-file (concat user-emacs-directory "/init.el")))
 
-(defun load-current-file ()
-  "Load current file"
-  (interactive)
-  (load-file (buffer-file-name)))
+;; Replaced the use of below with xah-run-current-file
+;; (defun load-current-file ()
+;;   "Load current file"
+;;   (interactive)
+;;   (load-file (buffer-file-name)))
 
 (defun revert-buffer-no-confirm ()
     "Revert buffer without confirmation."
@@ -164,18 +166,24 @@ Useful when you do `C-x 3` when you intended to do `C-x 2` and vice-versa."
 (defun full-screen-left ()
   (interactive)
   (set-frame-position (selected-frame) 0 0) ;; pixels x y from upper left
-  (set-frame-size (selected-frame) 238 71)  ;; rows and columns w h
+  (set-frame-size (selected-frame) 235 71)  ;; rows and columns w h
+  )
+;; Set the frame size to fill the right screen
+(defun full-screen-right ()
+  (interactive)
+  (set-frame-position (selected-frame) 1920 0) ;; pixels x y from upper left
+  (set-frame-size (selected-frame) 235 71)  ;; rows and columns w h
   )
 
 ;; Set the emacs frame/window size at startup
 ;; `boundp` returns t if SYMBOL's value is not void. This prevents the frame to
 ;; resize every time this file is re-evaluated. With the `unless boundp` condition
 ;; this block is evaluated only once when emacs starts.
-(unless (boundp 'emacs-initialized)
-  (when (window-system)
-    (set-frame-position (selected-frame) 0 0)
-    (set-frame-size (selected-frame) 90 30)
-    ))
+;;(unless (boundp 'emacs-initialized)
+;;  (when (window-system)
+;;    (set-frame-position (selected-frame) 0 0)
+;;    (set-frame-size (selected-frame) 90 30)
+;;    ))
 
 ;; Source: http://www.emacswiki.org/emacs/RecreateScratchBuffer
 (defun switch-to-scratch-and-back ()
@@ -189,17 +197,43 @@ Useful when you do `C-x 3` when you intended to do `C-x 2` and vice-versa."
                         ;; (lisp-interaction-mode)
                         ))))
 
-;; Source: http://stackoverflow.com/questions/12558019/shortcut-to-open-a-specific-file-in-emacs
-;; Source: http://www.gnu.org/software/emacs/manual/html_node/emacs/File-Registers.html#File-Registers
-;; Save the frequently accessed file locations in registers for quick access
-;; Now the init.el can be accessed using `C-x r j e`
-(set-register ?e (cons 'file (concat user-emacs-directory
-                                     "/init.el")))
-;; Now the setup-key-bindings.el can be accessed using `C-x r j k`
-(set-register ?k (cons 'file (concat user-emacs-directory
-                                     "/setup-files/setup-key-bindings.el")))
-;; Now the setup-key-bindings.el can be accessed using `C-x r j i`
-(set-register ?i (cons 'file "~/public_html/index.html" ))
+
+;; Perform the "C-g" action automatically when focus moves away from the minibuffer
+;; This is to avoid the irritating occassions where repeated `C-g` pressing doesn't
+;; edit the mini-buffer as cursor focus has moved out of it.
+;; Source: http://stackoverflow.com/questions/3022880/how-can-i-prevent-the-mini-buffer-from-displaying-previous-commands-in-emacs
+(defun stop-using-minibuffer ()
+  "kill the minibuffer"
+  (when (and (>= (recursion-depth) 1) (active-minibuffer-window))
+    (abort-recursive-edit)))
+(add-hook 'mouse-leave-buffer-hook 'stop-using-minibuffer)
+
+
+;; Source: http://www.emacswiki.org/emacs/FullScreen
+(defun toggle-fullscreen ()
+  "Toggle full screen on X11"
+  (interactive)
+  (when (eq window-system 'x)
+    (set-frame-parameter
+     nil 'fullscreen
+     (when (not (frame-parameter nil 'fullscreen)) 'fullboth))))
+
+
+;; Source: http://www.emacswiki.org/emacs/SwitchingBuffers
+(defun toggle-between-buffers ()
+  "Toggle between 2 buffers"
+  (interactive)
+  ;; (switch-to-buffer (other-buffer (current-buffer) 1)))
+  (switch-to-buffer (other-buffer)))
+;; (other-buffer &optional BUFFER VISIBLE-OK FRAME)
+;; - Return most recently selected buffer other than BUFFER. Ignore the argument
+;;   BUFFER unless it denotes a live buffer.
+;; - If VISIBLE-OK==1, a buffer is returned even when it is visible in a split
+;;   window.Buffers not visible in windows are preferred to visible buffers,
+;;   unless optional second argument VISIBLE-OK is non-nil.
+;; - If the optional third argument FRAME is non-nil, use that frame's buffer
+;;   list instead of the selected frame's buffer list.
+
 
 ;; TODO: Fix below function, it sort of works, not perfect
 ;; Reopen the last killed buffer
@@ -213,15 +247,27 @@ Useful when you do `C-x 3` when you intended to do `C-x 2` and vice-versa."
     (loop for file in recentf-list
           unless (member file active-files) return (find-file file))))
 
-;; Perform the "C-g" action automatically when focus moves away from the minibuffer
-;; This is to avoid the irritating occassions where repeated `C-g` pressing doesn't
-;; edit the mini-buffer as cursor focus has moved out of it.
-;; Source: http://stackoverflow.com/questions/3022880/how-can-i-prevent-the-mini-buffer-from-displaying-previous-commands-in-emacs
-(defun stop-using-minibuffer ()
-  "kill the minibuffer"
-  (when (and (>= (recursion-depth) 1) (active-minibuffer-window))
-    (abort-recursive-edit)))
-(add-hook 'mouse-leave-buffer-hook 'stop-using-minibuffer)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Scroll without moving the point/cursor
+(defun scroll-up-dont-move-point ()
+  "Scroll up by 1 line without moving the point."
+  (interactive)
+  (scroll-up 1))
+
+(defun scroll-down-dont-move-point ()
+  "Scroll down by 1 line without moving the point."
+  (interactive)
+  (scroll-down 1))
+
+(defun scroll-other-window-up-dont-move-point ()
+  "Scroll other window up by 1 line without moving the point."
+  (interactive)
+  (scroll-other-window 1))
+
+(defun scroll-other-window-down-dont-move-point ()
+  "Scroll other window down by 1 line without moving the point."
+  (interactive)
+  (scroll-other-window -1))
 
 
 (setq setup-windows-buffers-loaded t)

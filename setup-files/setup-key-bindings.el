@@ -1,4 +1,4 @@
-;; Time-stamp: <2014-08-19 19:18:39 cfricano>
+;; Time-stamp: <2014-10-24 12:45:00 cfricano>
 
 ;; KEY BINDINGS
 
@@ -7,21 +7,19 @@
 ;; the keystrokes you're interested in. What Emacs shows in the Help buffer is
 ;; the string you can pass to the macro 'kbd.
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; ** Binding the Function keys **
-;; verilog-mode package
-;; highlight-symbol package
-;; smart-compile package
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 (global-set-key [f1]       'goto-line) ;; Default `M-g M-g` for `goto-line'
 
+;; (when (boundp 'setup-highlight-loaded)
+;;   (global-set-key [C-f3]  'highlight-symbol-at-point)
+;;   (global-set-key [f3]    'highlight-symbol-next)
+;;   (global-set-key [f2]    'highlight-symbol-prev)
+;;   (global-set-key [C-f2]  'highlight-symbol-remove-all)
+;;   (global-set-key [M-f3]  'highlight-symbol-query-replace))
+
 (when (boundp 'setup-highlight-loaded)
-  (global-set-key [C-f3]  'highlight-symbol-at-point)
-  (global-set-key [f3]    'highlight-symbol-next)
-  (global-set-key [f2]    'highlight-symbol-prev)
-  (global-set-key [C-f2]  'highlight-symbol-remove-all)
-  (global-set-key [M-f3]  'highlight-symbol-query-replace))
+  (global-set-key [f3]    'highlight-frame-toggle)
+  (global-set-key [C-f3]  'clear-highlight-frame)
+  (global-set-key [f2]    'auto-highlight-symbol-mode))
 
 (global-set-key [f4]       'kmacro-end-or-call-macro) ;; end macro recording/call last macro
 (global-set-key [S-f4]     'start-kbd-macro) ;; start macro recording
@@ -33,7 +31,7 @@
   (global-set-key [C-f5]   'save-compile-execute))
 
 (when (boundp 'setup-editing-loaded)
-  (global-set-key [f6]       'toggle-comment-on-line))
+  (global-set-key [f6]       'toggle-comment-on-line-or-region))
 ;; (global-set-key [S-f6]     'uncomment-region) ;; and also to add comment to end of current line
 
 ;;ces (when (boundp 'setup-occur-loaded)
@@ -41,11 +39,12 @@
 ;;ces   (global-set-key [C-f6]   'multi-occur-in-matching-buffers) ;; search the regexp in buffers matching the regexp
 ;;ces   )
 
-(global-set-key [C-f7]     'ps-print-buffer-with-faces) ;; print to printer defined by env var `PRINTER'
+;; (global-set-key [f7] )
 
 ;; F8 key can't be used as it launches the VNC menu
 ;; It can though be used with shift/ctrl/alt keys
-;; (global-set-key [S-f8]     )
+(when (boundp 'setup-visual-loaded)
+  (global-set-key [S-f8]   'toggle-presentation-mode))
 
 (global-set-key [f9]       'eval-region)
 (global-set-key [S-f9]     'eshell)
@@ -55,12 +54,25 @@
   (global-set-key [S-f10]  'sos-ci)
   (global-set-key [C-f10]  'sos-discardco))
 
-(global-set-key [f11]       'menu-bar-mode) ;; Toggle the menu bar: File|Edit|Options|..
+;;cef (global-set-key [f11]       'menu-bar-mode) ;; Toggle the menu bar: File|Edit|Options|..
 ;;ces (global-set-key [S-f11]     'session-save) ;; Save the current desktop session
+(when (boundp 'setup-spell-loaded)
+  (global-set-key [f11] 'flyspell-auto-correct-word) ;; auto correct the last incorrect word
+  )
 
 (global-set-key [f12]       'revert-buffer)
 (when (boundp 'setup-windows-buffers-loaded)
   (global-set-key [S-f12]   'revert-all-buffers))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Unset keys
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(global-unset-key (kbd "C-z")) ;; it is bound to `suspend-frame' by default
+;; suspend-frame can be called using `C-x C-z` too. And `C-z` is used as prefix
+;; key in tmux. So removing the `C-z` binding from emacs makes it possible to
+;; use emacs in -nw (no window) mode in tmux if needed without any key binding
+;; contention.
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -99,10 +111,19 @@
                (define-key verilog-mode-map (kbd "C-;") 'shrink-window))))
 (global-set-key (kbd "C-'")       'enlarge-window) ;; make window taller
 
-;;ces (global-set-key (kbd "C-c k")     'windmove-up) ;; switch to buffer on top
-;;ces (global-set-key (kbd "C-c j")     'windmove-down) ;; switch to buffer on bottom
-;;ces (global-set-key (kbd "C-c h")     'windmove-left) ;; switch to buffer on left
-;;ces (global-set-key (kbd "C-c l")     'windmove-right) ;; switch to buffer on right
+;; Make Control+mousewheel do increase/decrease font-size
+;; Source: http://ergoemacs.org/emacs/emacs_mouse_wheel_config.html
+(global-unset-key (kbd "<C-down-mouse-1>")) ;; it is bound to `mouse-buffer-menu'
+;; by default. It is inconvenient when that mouse menu pops up when I don't need
+;; it to. And actually I have never used that menu :P
+(global-set-key (kbd "<C-mouse-1>") 'font-size-reset) ;; C + left mouse click
+(global-set-key (kbd "<C-mouse-4>") 'font-size-incr) ;; C + wheel-up
+(global-set-key (kbd "<C-mouse-5>") 'font-size-decr) ;; C + wheel-down
+
+;; Make Alt+mousewheel scroll the other buffer
+(global-set-key (kbd "<M-mouse-4>") 'scroll-other-window-down-dont-move-point) ;; M + wheel-up
+(global-set-key (kbd "<M-mouse-5>") 'scroll-other-window-up-dont-move-point) ;; M + wheel-down
+
 (windmove-default-keybindings)
 ;; Make windmove work in org-mode:
 (add-hook 'org-shiftup-final-hook 'windmove-up)
@@ -113,6 +134,10 @@
 (global-set-key (kbd "C-c t")     'toggle-window-split) ;; convert between horz-split <-> vert-split
 (global-set-key (kbd "C-c s")     'rotate-windows) ;; rotate windows clockwise. This will do the act of swapping windows if the frame is split into only 2 windows
 
+(global-set-key (kbd "<C-S-left>")  'full-screen-left)  ;; maximize window on left monitor
+(global-set-key (kbd "<C-S-right>") 'full-screen-right) ;; maximize window on right monitor
+
+
 (global-set-key (kbd "C-x C-b")   'ibuffer) ;; replace buffer-menu with ibuffer
 
 (when (boundp 'setup-windows-buffers-loaded)
@@ -122,29 +147,44 @@
   (global-set-key (kbd "C-x C-r") 'rename-current-buffer-file)
   (define-key modi-map (kbd "b")  'switch-to-scratch-and-back) ;; C-x m b
   ;; overriding the `C-x C-o` binding with `delete-blank-lines'
-  (global-set-key (kbd "C-x C-o") 'recentf-open-files)
-  (define-key modi-map (kbd "l")  'load-current-file) ;; C-x m l
-  (global-set-key (kbd "C-S-t")   'undo-kill-buffer) ;; same shortcut as for reopening closed tabs in browsers
+  (global-set-key (kbd "C-x C-o")   'ido-find-recentf)
+  (define-key modi-map (kbd "l")    'load-current-file) ;; C-x m l
+  (global-set-key (kbd "C-S-t")     'undo-kill-buffer) ;; same shortcut as for reopening closed tabs in browsers
+  (global-set-key (kbd "<M-up>")    'scroll-down-dont-move-point)
+  (global-set-key (kbd "<M-down>")  'scroll-up-dont-move-point)
+  ;; Change the default `M-left` key binding from `left-word'
+  ;; The same function anyways is also bound to `C-left`
+  (global-set-key (kbd "<M-left>")  'scroll-other-window-down-dont-move-point)
+  ;; Change the default `M-right` key binding from `right-word'
+  ;; The same function anyways is also bound to `C-right`
+  (global-set-key (kbd "<M-right>") 'scroll-other-window-up-dont-move-point)
+  (define-key modi-map (kbd "f")    'full-screen-left) ;; C-x m f
 )
 
-;; Cycle the buffers in reverse order than what happens with `C-x o`
-(global-set-key (kbd "<C-tab>")   'other-window) ;; alternative shortcut for `C-x o`
-(global-set-key (kbd "C-x O")
-                (lambda ()
-                  (interactive)
-                  (other-window -1)))
+;; Print to printer defined by env var `PRINTER'
+(define-key modi-map (kbd "p")    'ps-print-buffer-with-faces) ;; C-x m p
+
+;; (global-set-key (kbd "<C-tab>")   'other-window) ;; alternative shortcut for `C-x o`
+;; ;; Cycle the buffers in reverse order than what happens with `C-x o`
+;; (global-set-key (kbd "C-x O")
+;;                 (lambda ()
+;;                   (interactive)
+;;                   (other-window -1)))
 
 (when (boundp 'setup-dired-loaded)
   ;; Change the default `C-x C-d` key binding from `ido-list-directory'
-  (global-set-key (kbd "C-x C-d") 'dired-single-magic-buffer)
-  ;; Change the default `C-x C-j` key binding from  `dired-jump'
   ;; dired magic buffer is now used instead of the default dired for the same action
-  (global-set-key (kbd "C-x C-j")
+  (global-set-key (kbd "C-x C-d")
                   (lambda()
                     (interactive)
                     (dired-single-magic-buffer default-directory)))
+  ;; Change the default `C-x C-j` key binding from `dired-jump'
+  ;; Opens dired-single-magic-buffer but asks which directory to open that dired
+  ;; buffer for
+  (global-set-key (kbd "C-x C-j") 'dired-single-magic-buffer)
   )
 
+(define-key modi-map (kbd "y")    'bury-buffer) ;; C-x m y
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Navigation
@@ -207,10 +247,6 @@
   (global-set-key (kbd "C-c C-d")     'insert-current-date-time)
   (global-set-key (kbd "C-c C-t")     'insert-current-time)
 
-  (global-set-key (kbd "<C-S-up>")    'drag-stuff-up)
-  (global-set-key (kbd "<C-S-down>")  'drag-stuff-down)
-  (global-set-key (kbd "<C-S-left>")  'drag-stuff-left)
-  (global-set-key (kbd "<C-S-right>") 'drag-stuff-right)
   (global-set-key (kbd "C-S-d")       'duplicate-current-line-or-region)
 
   ;; override the binding of `C-x =` for `what-cursor-position'
@@ -220,31 +256,67 @@
   ;; lines must have the same number of columns of groups of non-space characters
   (global-set-key (kbd "C-x |")       'align-columns)
 
+  (global-set-key (kbd "C-k")         'kill-line)
+  (global-set-key (kbd "C-S-k")       'smart-kill-whole-line)
+  ;; override the binding of `C-o` for `open-line'
+  (global-set-key (kbd "C-o")         'smart-open-line)
+
   (define-key modi-map (kbd "x")      'eval-and-replace-last-sexp) ;; C-x m x
   )
 
-(when (boundp 'setup-visual-regexp-loaded)
-  (global-set-key (kbd "C-c r")      'vr/replace)
-  (global-set-key (kbd "C-c q")      'vr/query-replace))
+(when (boundp 'setup-drag-stuff-loaded)
+  (global-set-key (kbd "<C-S-up>")    'drag-stuff-up)
+  (global-set-key (kbd "<C-S-down>")  'drag-stuff-down)
+  ;;(global-set-key (kbd "<C-S-left>")  'drag-stuff-left)
+  ;;(global-set-key (kbd "<C-S-right>") 'drag-stuff-right)
+  )
 
-;; Insert a newline at the current cursor location, while not moving the cursor
-(global-set-key (kbd "C-o")          'open-line)
-;; Join the following line onto the current one
-(global-set-key (kbd "C-j")
-                (lambda ()
-                  (interactive)
-                  (join-line -1)))
+(when (boundp 'setup-editing-loaded)
+  (global-set-key            (kbd "C-j") 'pull-up-line))
+
 (global-set-key (kbd "M-j")          'comment-indent-new-line)
 (global-set-key (kbd "C-M-j")        'comment-indent-new-line)
 
 (when (boundp 'setup-search-loaded)
-  (global-set-key (kbd "C-S-s")   'isearch-current-symbol)
-  (global-set-key (kbd "C-S-r")   'isearch-backward-current-symbol)
-  (define-key modi-map (kbd "s")  'search-all-buffers)) ;; C-x m s
+  (global-set-key (kbd "C-S-s")      'isearch-current-symbol)
+  (global-set-key (kbd "C-S-r")      'isearch-backward-current-symbol)
+  (define-key modi-map (kbd "s")     'search-all-buffers) ;; C-x m s
+
+  ;; replace the emacs default query-replace
+  (global-set-key (kbd "M-%")        'anzu-query-replace)
+  (global-set-key (kbd "C-c r")      'anzu-replace-at-cursor-thing)
+
+  ;; swoop
+  (global-set-key (kbd "M-i")   'swoop)
+  (global-set-key (kbd "M-I")   'swoop-multi)
+  (global-set-key (kbd "M-o")   'swoop-pcre-regexp)
+  ;; Transition
+  ;; isearch     > press [C-o] > swoop
+  (define-key isearch-mode-map (kbd "C-o")      'swoop-from-isearch)
+  ;; swoop       > press [C-o] > swoop-multi
+  (define-key swoop-map (kbd "C-o")             'swoop-multi-from-swoop)
+  ;; Resume
+  ;; C-u M-x swoop : Use last used query
+  ;; Swoop Edit Mode
+  ;; During swoop, press [C-c C-e]
+  ;; You can edit synchronously
+  )
+
+(when (boundp 'setup-visual-regexp-loaded)
+  ;; replace the emacs default query-replace-regexp
+  (global-set-key (kbd "C-M-%")      'vr/query-replace)
+  (global-set-key (kbd "C-c q")      'vr/query-replace))
 
 (when (boundp 'setup-highlight-loaded)
-  (define-key modi-map (kbd "h")  'highlight-frame-toggle) ;; C-x m h
-  (define-key modi-map (kbd "H")  'clear-highlight-frame) ;; C-x m H
+  (define-key modi-map (kbd "h")          'highlight-frame-toggle)     ;; C-x m h
+  (define-key modi-map (kbd "H")          'clear-highlight-frame)      ;; C-x m H
+  (global-set-key (kbd "C-*")             'auto-highlight-symbol-mode)
+  (global-set-key (kbd "<C-kp-multiply>") 'auto-highlight-symbol-mode)
+  )
+
+(when (boundp 'setup-ag-loaded)
+  (define-key modi-map (kbd "a") 'ag-project-regexp) ;; C-x m a
+  (define-key modi-map (kbd "g") 'ag-project-regexp) ;; C-x m g
   )
 
 (global-set-key (kbd "M-/")          'indent-region)
@@ -256,11 +328,6 @@
 
 (global-set-key (kbd "C-x t")     'toggle-truncate-lines)
 
-(when (boundp 'setup-visual-loaded)
-  (global-set-key (kbd "C-x C-=") 'font-size-incr)
-  (global-set-key (kbd "C-x C--") 'font-size-decr)
-  (global-set-key (kbd "C-x C-0") 'font-size-reset))
-
 (when (boundp 'setup-hl-line+-loaded)
   (global-set-key (kbd "C-c C-f") 'hl-line-flash) ;; flash the current line
   )
@@ -271,25 +338,30 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (when (boundp 'setup-multiple-cursors-loaded)
-  (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
-  (global-set-key (kbd "C->")         'mc/mark-next-like-this)
-  (global-set-key (kbd "C-<")         'mc/mark-previous-like-this)
-  (global-set-key (kbd "C-c C-<")     'mc/mark-all-like-this)
-  (define-key modi-map (kbd "m")      'mc/edit-all-like-this) ;; C-x m m
+  (global-set-key (kbd "C-S-c C-S-c")   'mc/edit-lines)
+  (global-set-key (kbd "C->")           'mc/mark-next-like-this)
+  (global-set-key (kbd "C-<")           'mc/mark-previous-like-this)
+  (global-set-key (kbd "C-c C-<")       'mc/mark-all-like-this)
+
+  (global-set-key (kbd "C-S-<mouse-1>") 'mc/add-cursor-on-click)
+
+  (define-key modi-map (kbd "m")        'mc/mark-all-like-this-dwim) ;; C-x m m
+  (define-key modi-map (kbd "r")        'set-rectangular-region-anchor) ;; C-x m r
   )
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; helm-swoop package
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Commented out below; now replaced with swoop, thus not needing to install
+;; helm anymore!
+;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; ;; helm-swoop package
+;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(when (boundp 'setup-helm-loaded)
-  (global-set-key (kbd "M-i") 'helm-multi-swoop-all)
-  ;; (global-set-key (kbd "M-I") 'helm-swoop-back-to-last-point)
-  ;; When doing isearch, hand the word over to helm-swoop
-  (define-key isearch-mode-map (kbd "M-i") 'helm-swoop-from-isearch)
-  (global-set-key (kbd "C-c h") 'helm-mini)
-)
+;; (when (boundp 'setup-helm-loaded)
+;;   (global-set-key (kbd "M-i") 'helm-swoop)
+;;   (global-set-key (kbd "M-I") 'helm-multi-swoop-all)
+;;   ;; (global-set-key (kbd "M-I") 'helm-swoop-back-to-last-point)
+;;   ;; When doing isearch, hand the word over to helm-swoop
+;;   (define-key isearch-mode-map (kbd "M-i") 'helm-swoop-from-isearch))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -322,7 +394,10 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (when (boundp 'setup-expand-region-loaded)
-  (global-set-key (kbd "C-=") 'er/expand-region))
+  ;; bind er/expand-region to `C-\' instead of `C-=' because `=' sign clashes
+  ;; when trying to wrap a selection with `=' in org-mode using the wrap-region
+  ;; package
+  (global-set-key (kbd "C-\\") 'my-expand-region))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -344,6 +419,53 @@
   (add-hook 'org-mode-hook
             '(lambda ()
                (define-key org-mode-map "\C-c " nil))))
+
+(when (boundp 'setup-ace-window-loaded)
+  (global-set-key (kbd "C-x o")  'ace-window)
+  )
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Registers
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Text-Registers.html#Text-Registers
+;;     C-x r s REG <- Copy region to register REG
+;; C-u C-x r s REG <- CUT region and move to register REG
+;;     C-x r i REG <- Insert text from register REG
+;;     C-x r a REG <- Append region to text in register REG
+;;     C-x r + REG <- Append region to text in register REG if REG already
+;;                    contains text; but increments the content of REG if the
+;;                    content is a number.
+
+(when (boundp 'setup-iregister-loaded)
+  (define-key modi-map (kbd "i") 'iregister-latest-text) ;; C-x m i
+  ;; If region is active then `iregister-point-or-text-to-register' command stores a
+  ;; text to any empty register, otherwise it stores a point.
+  (global-set-key (kbd "M-w") 'iregister-point-or-text-to-register-kill-ring-save) ;; Replace normal copy function
+  (global-set-key (kbd "C-w") 'iregister-copy-to-register-kill) ;; Replace normal 'cut' function
+
+  ;; Copy the selection and append to the latest register
+  (global-set-key (kbd "C-x r a") 'iregister-append-to-latest-register)
+  ;; Delete the selection and append to the latest register
+  (global-set-key (kbd "C-x r A") 'iregister-append-to-latest-register-delete)
+
+  ;; Assuming that there are already stored some texts (by means of `copy-to-register'
+  ;; or `iregister-copy-to-register' command) in the registers. Execute
+  ;; `iregister-text' and the minibuffer will display the text stored in some
+  ;; register.
+  ;; Key bindings when the `iregister-text minibuffer is active:
+  ;;   RET        - The selected text will be inserted
+  ;;   l          - View the latest text stored in the registers
+  ;;   n          - View next text previously stored in the registers
+  ;;   p          - View previous text previously stored in the registers
+  ;;   d          - Delete current text from the register
+  ;;   q or `C-g' - To quit from the minibuffer
+  ;;   a          - Append the selected text to the current text registry
+  ;;   A          - Prepend the selected text to the current text registry
+  (global-set-key (kbd "M-n") 'iregister-jump-to-next-marker)
+  (global-set-key (kbd "M-p") 'iregister-jump-to-previous-marker)
+  )
+
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

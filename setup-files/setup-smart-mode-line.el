@@ -1,24 +1,16 @@
-;; Time-stamp: <2013-12-17 16:34:19 kmodi>
+;; Time-stamp: <2014-10-24 10:23:10 cfricano>
 
 ;; smart-mode-line
 ;; emacs modeline aka statusbar
 ;; Source: https://github.com/Bruce-Connor/smart-mode-line
 
+;; It is crucial that this require line happens after the above setq block
+(require 'smart-mode-line)
+
 (setq sml/theme 'dark
       sml/name-width 40 ;; space allocated for the buffer name in the mode-line
       sml/line-number-format "%4l"
       sml/mode-width 'full
-      sml/hidden-modes
-      '(" Guide" ;; guide-key mode
-        " hc"    ;; hardcore mode
-        " AC"    ;; auto-complete
-        " vl"    ;; global visual line mode enabled
-        " Wrap"  ;; shows up if visual-line-mode is enabled for that buffer
-        " Helm"  ;; helm-mode
-        " Omit"  ;; Omit mode in dired
-        " yas"   ;; yasnippet
-        " drag"  ;; drag-stuff-mode
-        )
       sml/replacer-regexp-list
       '(
         ("^~/org/" ":Org:")
@@ -64,8 +56,24 @@
       column-number-mode t ;; show column # in mode-line
       )
 
-;; It is crucial that this require line happens after the above setq block
-(require 'smart-mode-line)
+    (setq rm-excluded-modes
+          '(" Guide"     ;; guide-key mode
+            " hc"        ;; hardcore mode
+            " AC"        ;; auto-complete
+            " vl"        ;; global visual line mode enabled
+            " Wrap"      ;; shows up if visual-line-mode is enabled for that buffer
+            " Omit"      ;; omit mode in dired
+            " yas"       ;; yasnippet
+            " drag"      ;; drag-stuff-mode
+            " VHl"       ;; volatile highlights
+            " ctagsU"    ;; ctags update
+            " Undo-Tree" ;; undo tree
+            " wr"        ;; Wrap Region
+            " SliNav"    ;; elisp-slime-nav
+            " Fly"       ;; Flycheck
+            " PgLn"      ;; page-line-break
+            " GG"        ;; ggtags
+            ))
 
 ;; Load sml with above configuration
 (sml/setup)

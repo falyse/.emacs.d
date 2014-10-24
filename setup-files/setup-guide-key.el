@@ -1,4 +1,4 @@
-;; Time-stamp: <2014-07-14 19:52:45 cfricano>
+;; Time-stamp: <2014-10-23 17:22:42 cfricano>
 
 ;; Guide Key
 ;; Source: https://github.com/kbkbkbkb1/guide-key
@@ -6,12 +6,15 @@
 (require 'guide-key)
 
 (setq guide-key/guide-key-sequence '("C-x r" ;; rectangle, registers
-                                     "C-x 4" ;; other window
+                                     "C-x 4" ;; commands that operate in other window (buffer)
+                                     "C-x 5" ;; commands that operate in other frame (window)
                                      "C-c p" ;; projectile
                                      "C-c v" ;; workgroups
                                      "C-x m" ;; my custom map: modi-map
                                      "C-x"
                                      "C-c"
+                                     "C-c C-c"
+                                     "C-c C-t" ;; verilog-mode insert blocks
                                      )
       guide-key/highlight-command-regexp "rectangle"
       ;; guide-key can highlight commands which match a specified regular expression.

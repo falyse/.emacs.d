@@ -2,13 +2,7 @@
 ;; https://snarfed.org/why_i_run_shells_inside_emacs
 ;; https://snarfed.org/why_i_dont_run_shells_inside_emacs
 
-;;ces (defvar my-local-shells
-;;ces   '("*shell0*" "*shell1*" "*shell2*" "*shell3*" "*music*"))
-;;ces (defvar my-remote-shells
-;;ces   '("*snarfed*" "*heaven0*" "*heaven1*" "*heaven2*" "*heaven3*"))
-;;ces (defvar my-shells (append my-local-shells my-remote-shells))
-;;ces 
-;;ces (require 'tramp)
+(require 'tramp)
 
 (custom-set-variables
 ;;ces  '(tramp-default-method "ssh")          ; uses ControlMaster

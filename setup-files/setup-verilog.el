@@ -1,4 +1,4 @@
-;; Time-stamp: <2014-02-05 15:59:35 cschmitt>
+;; Time-stamp: <2014-10-24 10:27:14 cfricano>
 
 ;; Verilog
 
@@ -75,6 +75,39 @@
 ;; (add-to-list 'ffap-alist '(verilog-mode . ffap-verilog) 'append)
 ;; (define-key global-map (kbd "C-S-x C-S-f") 'find-file-at-point)
 
+
+(defun my-verilog-mode-customizations()
+  ;; Unbind the backtick binding done to `electric-verilog-tick'
+  ;; With binding done to electric-verilog-tick, it's not possible to type
+  ;; backticks on multiple lines simultaneously in multiple-cursors mode
+  (define-key verilog-mode-map "\`"          nil)
+  (define-key verilog-mode-map (kbd "C-c d") 'my-verilog-insert-date)
+  ;; Replace tabs with spaces when saving files in verilog-mode
+  ;; Source: http://www.veripool.org/issues/345-Verilog-mode-can-t-get-untabify-on-save-to-work
+  ;; Note that keeping that `nil' in the argument is crucial; otherwise emacs
+  ;; with stay stuck with the "Saving file .." message and the file won't be
+  ;; saved.
+  (add-hook 'local-write-file-hooks
+            (λ (untabify (point-min) (point-max)) nil))
+
+  ;; Source: http://emacs-fu.blogspot.com/2008/12/highlighting-todo-fixme-and-friends.html
+  (font-lock-add-keywords nil
+                          '(("\\b\\(FIXME\\|TODO\\|BUG\\)\\b" 1
+                             font-lock-warning-face t)))
+  ;; Above solution highlights those keywords anywhere in the buffer (not just
+  ;; in comments). To do the highlighting intelligently, install the fic-mode
+  ;; package -- http://www.emacswiki.org/emacs/fci-mode.el
+  )
+(add-hook 'verilog-mode-hook 'my-verilog-mode-customizations)
+
+;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Macros saved as functions
+;;
+;; Regex Search Expression - \$display(\(.*?\));\(.*\)
+;; Replace Expression - `uvm_info("REPLACE_THIS_GENERIC_ID", $sformatf(\1), UVM_MEDIUM) \2
+(fset 'uvm-convert-display-to-uvm_info
+      (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ([3 113 92 36 100 105 115 112 108 97 121 40 92 40 46 42 63 92 41 41 59 92 40 46 42 92 41 return 96 117 118 109 95 105 110 102 111 40 34 82 69 80 76 65 67 69 95 84 72 73 83 95 71 69 78 69 82 73 67 95 73 68 34 44 32 36 115 102 111 114 109 97 116 102 40 92 49 41 44 32 85 86 77 95 77 69 68 73 85 77 41 32 92 50 return 33] 0 "%d")) arg)))
+;;
 
 (setq setup-verilog-loaded t)
 (provide 'setup-verilog)
