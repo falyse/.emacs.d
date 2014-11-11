@@ -1,4 +1,4 @@
-;; Time-stamp: <2014-10-24 13:02:44 cfricano>
+;; Time-stamp: <2014-10-28 14:36:29 cfricano>
 ;; Original Author: Kaushal Modi
 ;; Modified By: Courtney Schmitt
 
@@ -93,14 +93,13 @@
 ;;ces (require 'setup-multiple-cursors)  ;; multiple-cursors
 (require 'setup-org)  ;; org
 (require 'setup-popwin)  ;; popwin
-(require 'setup-pretty-mode)  ;; pretty-mode
+;;(require 'setup-pretty-mode)  ;; pretty-mode
 (require 'setup-projectile)  ;; projectile
 ;;ces (require 'setup-server)  ;; emacs server  ;; ces using emacs --daemon instead
 ;;ces (require 'setup-smart-compile)  ;; smart-compile
 (require 'setup-smart-mode-line)  ;; smart-mode-line
 (require 'setup-smex)  ;; smex
 (require 'setup-stripe-buffer)  ;; stripe-buffer
-(require 'setup-workgroups)  ;; workgroups2
 (require 'setup-yafolding)
 ;;cef (require 'setup-yasnippet)  ;; yasnippet
 
@@ -128,10 +127,12 @@
 
 
 ;; NOTE: Load below ONLY after loading all the packages
+(require 'setup-workgroups)  ;; workgroups2
 (require 'setup-key-bindings)
 
 ;; Load the default theme
 (funcall default-theme)
+(funcall 'full-screen-right)
 
 (setq emacs-initialized t)
 

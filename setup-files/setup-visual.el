@@ -1,4 +1,4 @@
-;; Time-stamp: <2014-10-24 11:31:02 cfricano>
+;; Time-stamp: <2014-11-11 08:43:46 cfricano>
 
 ;; Set up the looks of emacs
 
@@ -207,7 +207,7 @@
            ;; Color when the buffer is writeable but overwrite mode is on
            (if overwrite-mode "red"
              ;; Color when the buffer is writeable but overwrite mode if off
-             (if dark-theme "white" "gray")))))
+             (if dark-theme "white" "#626262")))))
     (unless (and
              (string= color hcz-set-cursor-color-color)
              (string= (buffer-name) hcz-set-cursor-color-buffer))
@@ -239,7 +239,7 @@
   (interactive)
   (setq font-size-pt default-font-size-pt)
   (set-face-attribute 'default nil :height (* font-size-pt 10))
-  (full-screen-center)
+  (full-screen-right)
   (funcall default-theme) ;; change to default theme
   (split-window-right)
   (setq presentation-mode-enabled nil)
