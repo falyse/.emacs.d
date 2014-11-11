@@ -1,4 +1,4 @@
-;; Time-stamp: <2014-10-24 10:27:14 cfricano>
+;; Time-stamp: <2014-10-27 16:04:10 cfricano>
 
 ;; Verilog
 
@@ -87,8 +87,8 @@
   ;; Note that keeping that `nil' in the argument is crucial; otherwise emacs
   ;; with stay stuck with the "Saving file .." message and the file won't be
   ;; saved.
-  (add-hook 'local-write-file-hooks
-            (λ (untabify (point-min) (point-max)) nil))
+  ;;(add-hook 'local-write-file-hooks
+  ;;          (lambda() (untabify (point-min) (point-max)) nil))
 
   ;; Source: http://emacs-fu.blogspot.com/2008/12/highlighting-todo-fixme-and-friends.html
   (font-lock-add-keywords nil
