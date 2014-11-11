@@ -9,7 +9,7 @@
 (setq wg-prefix-key (kbd "C-c v"))
 
 ;; Change workgroups session file
-(setq wg-default-session-file "~/.emacs.tmp/.emacs_workgroups")
+(setq wg-default-session-file "~/.emacs.tmp/.emacs_workgroup")
 
 ;; Set your own keyboard shortcuts to reload/save/switch WG:
 ;;(global-set-key (kbd "<pause>")     'wg-reload-session)
@@ -20,9 +20,13 @@
 (global-set-key (kbd "<s-right>")   'wg-switch-to-workgroup-right)
 (global-set-key (kbd "s-b")         'wg-switch-to-buffer)
 (global-set-key (kbd "C-x x")       'wg-switch-to-buffer)
+(global-set-key (kbd "C-c v -")     'wg-dissociate-buffer-from-workgroup)
 
 ;; Restore all associated buffers
 (setq wg-restore-associated-buffers t)
+
+;; Associate buffers with specific workgroup for wg-switch-to-buffer
+(setq wg-mess-with-buffer-list t)
 
 ;; Turn on workgroups mode
 (workgroups-mode 1)
