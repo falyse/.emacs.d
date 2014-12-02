@@ -1,4 +1,4 @@
-;; Time-stamp: <2014-10-28 12:47:23 cfricano>
+;; Time-stamp: <2014-11-21 12:04:23 cfricano>
 
 ;; KEY BINDINGS
 
@@ -7,7 +7,12 @@
 ;; the keystrokes you're interested in. What Emacs shows in the Help buffer is
 ;; the string you can pass to the macro 'kbd.
 
-(global-set-key [f1]       'goto-line) ;; Default `M-g M-g` for `goto-line'
+;;(global-set-key [f1]       'goto-line) ;; Default `M-g M-g` for `goto-line'
+
+(when (boundp 'setup-highlight-loaded)
+  (global-set-key [C-f1]  'highlight-frame-toggle)
+  (global-set-key [f1]    'clear-highlight-frame)
+  (global-set-key [M-f1]  'auto-highlight-symbol-mode))
 
 (when (boundp 'setup-highlight-loaded)
   (global-set-key [C-f3]  'highlight-symbol-at-point)
@@ -15,11 +20,6 @@
   (global-set-key [f2]    'highlight-symbol-prev)
   (global-set-key [C-f2]  'highlight-symbol-remove-all)
   (global-set-key [M-f3]  'highlight-symbol-query-replace))
-
-;; (when (boundp 'setup-highlight-loaded)
-;;   (global-set-key [f3]    'highlight-frame-toggle)
-;;   (global-set-key [C-f3]  'clear-highlight-frame)
-;;   (global-set-key [f2]    'auto-highlight-symbol-mode))
 
 (global-set-key [f4]       'kmacro-end-or-call-macro) ;; end macro recording/call last macro
 (global-set-key [S-f4]     'start-kbd-macro) ;; start macro recording
