@@ -1,0 +1,17 @@
+;;;; Emacs Bookmark Format Version 1 ;;;;
+;;; This format is meant to be slightly human-readable;
+;;; nevertheless, you probably don't want to edit it.
+;;; -*- End Of Bookmark File Format Version Stamp -*-
+(#1=(#("org-refile-last-stored" 0 22
+      (bmkp-full-record #1#))
+    (filename . "~/org/dvmt.org")
+    (buffer-name . "dvmt.org")
+    (front-context-string . "**** NEXT [#B] I")
+    (rear-context-string . "7-08 Wed 16:14]\n")
+    (front-context-region-string)
+    (rear-context-region-string)
+    (visits . 0)
+    (time . #2=(21927 60996 406034 532000))
+    (created . #2#)
+    (position . 2389))
+)

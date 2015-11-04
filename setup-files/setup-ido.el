@@ -1,4 +1,4 @@
-;; Time-stamp: <2014-10-23 18:18:55 cfricano>
+;; Time-stamp: <2014-12-03 10:02:21 cfricano>
 
 ;; Interactively Do Things
 ;; Source: http://www.masteringemacs.org/articles/2010/10/10/introduction-to-ido-mode/
@@ -93,19 +93,19 @@
 
 ;; sort ido filelist by mtime instead of alphabetically
 ;; source: http://www.emacswiki.org/emacs/InteractivelyDoThings
-(add-hook 'ido-make-file-list-hook 'ido-sort-mtime)
-(add-hook 'ido-make-dir-list-hook 'ido-sort-mtime)
-(defun ido-sort-mtime ()
-  (setq ido-temp-list
-        (sort ido-temp-list
-              (lambda (a b)
-                (time-less-p
-                 (sixth (file-attributes (concat ido-current-directory b)))
-                 (sixth (file-attributes (concat ido-current-directory a)))))))
-  (ido-to-end  ;; move . files to end (again)
-   (delq nil (mapcar
-              (lambda (x) (and (char-equal (string-to-char x) ?.) x))
-              ido-temp-list))))
+;;cef (add-hook 'ido-make-file-list-hook 'ido-sort-mtime)
+;;cef (add-hook 'ido-make-dir-list-hook 'ido-sort-mtime)
+;;cef (defun ido-sort-mtime ()
+;;cef   (setq ido-temp-list
+;;cef         (sort ido-temp-list
+;;cef               (lambda (a b)
+;;cef                 (time-less-p
+;;cef                  (sixth (file-attributes (concat ido-current-directory b)))
+;;cef                  (sixth (file-attributes (concat ido-current-directory a)))))))
+;;cef   (ido-to-end  ;; move . files to end (again)
+;;cef    (delq nil (mapcar
+;;cef               (lambda (x) (and (char-equal (string-to-char x) ?.) x))
+;;cef               ido-temp-list))))
 
 
 ;; Open recent files with IDO,

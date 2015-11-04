@@ -7,8 +7,8 @@
 ;; Don't set the fonts if emacs is launched in terminal mode or no-window mode,
 ;; using "emacs -nw". In that case the value of `window-system' is nil.
 ;; Source: http://stackoverflow.com/questions/5795451/how-to-detect-that-emacs-is-in-terminal-mode
-(if window-system
-    (set-fontset-font nil '(#x0250 . #x02af) (font-spec :family "DejaVu Sans Mono")))
+;; (if window-system
+;;     (set-fontset-font nil '(#x0250 . #x02af) (font-spec :family "DejaVu Sans Mono")))
 
 (setq ps-paper-type 'letter
       ps-print-color-p 'black-white

@@ -1,4 +1,4 @@
-;; Time-stamp: <2014-10-24 11:09:43 cfricano>
+;; Time-stamp: <2015-11-04 14:40:17 cfricano>
 
 ;; Functions to manipulate windows and buffers
 
@@ -166,13 +166,15 @@ Useful when you do `C-x 3` when you intended to do `C-x 2` and vice-versa."
 (defun full-screen-left ()
   (interactive)
   (set-frame-position (selected-frame) 0 0) ;; pixels x y from upper left
-  (set-frame-size (selected-frame) 235 71)  ;; rows and columns w h
+  ;; (set-frame-size (selected-frame) 235 71)  ;; rows and columns w h
+  (set-frame-size (selected-frame) 209 71)  ;; rows and columns w h
   )
 ;; Set the frame size to fill the right screen
 (defun full-screen-right ()
   (interactive)
   (set-frame-position (selected-frame) 1920 0) ;; pixels x y from upper left
-  (set-frame-size (selected-frame) 235 71)  ;; rows and columns w h
+  ;; (set-frame-size (selected-frame) 235 71)  ;; rows and columns w h
+  (set-frame-size (selected-frame) 209 71)  ;; rows and columns w h
   )
 
 ;; Set the emacs frame/window size at startup

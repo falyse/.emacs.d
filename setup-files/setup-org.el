@@ -1,4 +1,4 @@
-;; Time-stamp: <2014-10-24 09:05:05 cfricano>
+;; Time-stamp: <2015-07-16 13:52:48 cfricano>
 
 ;; Org Mode
 
@@ -194,56 +194,42 @@ this with to-do items than with projects or headings."
                       ((org-agenda-overriding-header "Tasks to re-file")
                        (org-tags-match-list-sublevels nil) 
                        (org-agenda-files (quote ("~/org/refile.org"))) ))
-                (tags-todo "Talise"
-                      ((org-agenda-overriding-header "Talise")
+                ;(tags-todo "Talise"
+                ;      ((org-agenda-overriding-header "Talise")
+                ;       (org-tags-match-list-sublevels 'indented)
+                ;       (org-agenda-sorting-strategy '(category-keep))
+                ;       (org-agenda-skip-function 
+                ;        (quote (org-agenda-skip-entry-if (quote todo) (quote done) (quote scheduled))))
+                ;       (org-agenda-files (quote ("~/org/talise.org"))) ))
+                ;(todo ""
+                ;      ((org-agenda-overriding-header "A2B/Balius")
+                ;       (org-tags-match-list-sublevels 'indented)
+                ;       (org-agenda-sorting-strategy '(category-keep))
+                ;       (org-agenda-skip-function 
+                ;        (quote (org-agenda-skip-entry-if (quote todo) (quote done) (quote scheduled))))
+                ;       (org-agenda-files (quote ("~/org/a2b.org"))) ))
+                ;(todo ""
+                ;      ((org-agenda-overriding-header "Telsa")
+                ;       (org-tags-match-list-sublevels 'indented)
+                ;       (org-agenda-sorting-strategy '(category-keep))
+                ;       (org-agenda-skip-function 
+                ;        (quote (org-agenda-skip-entry-if (quote todo) (quote done) (quote scheduled))))
+                ;       (org-agenda-files (quote ("~/org/tesla.org"))) ))
+                (tags-todo "TBG"
+                      ((org-agenda-overriding-header "TBG")
                        (org-tags-match-list-sublevels 'indented)
                        (org-agenda-sorting-strategy '(category-keep))
                        (org-agenda-skip-function 
                         (quote (org-agenda-skip-entry-if (quote todo) (quote done) (quote scheduled))))
-                       (org-agenda-files (quote ("~/org/talise.org"))) ))
-                (todo ""
-                      ((org-agenda-overriding-header "A2B/Balius")
+                       (org-agenda-files (quote ("~/org/tbg.org"))) ))
+                (tags-todo "ADVIP"
+                      ((org-agenda-overriding-header "ADVIP")
                        (org-tags-match-list-sublevels 'indented)
                        (org-agenda-sorting-strategy '(category-keep))
                        (org-agenda-skip-function 
                         (quote (org-agenda-skip-entry-if (quote todo) (quote done) (quote scheduled))))
-                       (org-agenda-files (quote ("~/org/a2b.org"))) ))
-                ;;(tags-todo "VMU"
-                ;;      ((org-agenda-overriding-header "Telsa VMU")
-                ;;       (org-tags-match-list-sublevels 'indented)
-                ;;       (org-agenda-sorting-strategy '(category-keep))
-                ;;       (org-agenda-skip-function 
-                ;;        (quote (org-agenda-skip-entry-if (quote todo) (quote done) (quote scheduled)))) 
-                ;;       (org-agenda-files (quote ("~/org/tesla.org"))) ))
-                ;;(tags-todo "OCU"
-                ;;      ((org-agenda-overriding-header "Telsa OCU")
-                ;;       (org-tags-match-list-sublevels 'indented)
-                ;;       (org-agenda-sorting-strategy '(category-keep))
-                ;;       (org-agenda-skip-function 
-                ;;        (quote (org-agenda-skip-entry-if (quote todo) (quote done) (quote scheduled)))) 
-                ;;       (org-agenda-files (quote ("~/org/tesla.org"))) ))
-                ;;(tags-todo "SYSOSC"
-                ;;      ((org-agenda-overriding-header "Telsa SYSOSC")
-                ;;       (org-tags-match-list-sublevels 'indented)
-                ;;       (org-agenda-sorting-strategy '(category-keep))
-                ;;       (org-agenda-skip-function 
-                ;;        (quote (org-agenda-skip-entry-if (quote todo) (quote done) (quote scheduled))))
-                ;;       (org-agenda-files (quote ("~/org/tesla.org"))) ))
-                ;;(tags-todo "MONOSC"
-                ;;      ((org-agenda-overriding-header "Telsa MONOSC")
-                ;;       (org-tags-match-list-sublevels 'indented)
-                ;;       (org-agenda-sorting-strategy '(category-keep))
-                ;;       (org-agenda-skip-function 
-                ;;        (quote (org-agenda-skip-entry-if (quote todo) (quote done) (quote scheduled))))
-                ;;       (org-agenda-files (quote ("~/org/tesla.org"))) ))
-                (tags-todo "TESLA_SYSLVL"
-                      ((org-agenda-overriding-header "Telsa SYSLVL")
-                       (org-tags-match-list-sublevels 'indented)
-                       (org-agenda-sorting-strategy '(category-keep))
-                       (org-agenda-skip-function 
-                        (quote (org-agenda-skip-entry-if (quote todo) (quote done) (quote scheduled))))
-                       (org-agenda-files (quote ("~/org/tesla.org"))) ))
-                (todo ""
+                       (org-agenda-files (quote ("~/org/advip.org"))) ))
+                (tags-todo "DVMT"
                       ((org-agenda-overriding-header "DVMT")
                        (org-tags-match-list-sublevels 'indented)
                        (org-agenda-sorting-strategy '(category-keep))
@@ -251,19 +237,12 @@ this with to-do items than with projects or headings."
                         (quote (org-agenda-skip-entry-if (quote todo) (quote done) (quote scheduled))))
                        (org-agenda-files (quote ("~/org/dvmt.org"))) ))
                 (todo ""
-                      ((org-agenda-overriding-header "FV Team")
-                       (org-tags-match-list-sublevels 'indented)
-                       (org-agenda-sorting-strategy '(category-keep))
-                       (org-agenda-skip-function 
-                        (quote (org-agenda-skip-entry-if (quote todo) (quote done) (quote scheduled))))
-                       (org-agenda-files (quote ("~/org/fvteam.org"))) ))
-                (todo ""
                       ((org-agenda-overriding-header "Other")
                        (org-tags-match-list-sublevels 'indented)
                        (org-agenda-sorting-strategy '(priority-down category-keep))
                        (org-agenda-skip-function 
                         (quote (org-agenda-skip-entry-if (quote todo) (quote done) (quote scheduled))))
-                       (org-agenda-files '("~/org/papers.org" "~/org/emacs.org" "~/org/meetings.org")) ))
+                       (org-agenda-files '("~/org/papers.org" "~/org/emacs.org" "~/org/meetings.org" "~/org/talise.org" "~/org/a2b.org" "~/org/tesla.org")) ))
                 ))
               ("x" "Agenda"
                (;(agenda "" nil)

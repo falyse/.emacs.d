@@ -1,4 +1,4 @@
-;; Time-stamp: <2014-10-24 10:23:39 cfricano>
+;; Time-stamp: <2015-02-20 11:45:10 cfricano>
 
 ;; Stripe Mode
 ;; Source: https://github.com/sabof/stripe-buffer/blob/master/README.md

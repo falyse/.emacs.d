@@ -1,10 +1,13 @@
-;; Time-stamp: <2014-11-11 08:43:46 cfricano>
+;; Time-stamp: <2015-11-04 14:41:05 cfricano>
 
 ;; Set up the looks of emacs
 
 (setq default-font-size-pt 10 ;; default font size
       dark-theme          nil ;; initialize dark-theme var
       )
+
+;;(add-to-list 'default-frame-alist
+;;             '(font . "-misc-fixed-medium-r-normal--13-120-75-75-c-80-iso8859-1"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; MENU/TOOL/SCROLL BARS
@@ -96,17 +99,17 @@
              (lambda (&rest frame)
                (funcall default-theme)))
 
-(add-hook 'after-init-hook
-          '(lambda()
-             ;; Frame title bar format
-             ;; If buffer-file-name exists, show it;
-             ;; else if you are in dired mode, show the directory name
-             ;; else show only the buffer name (*scratch*, *Messages*, etc)
-             ;; Append the value of PRJ_NAME env var to the above.
-             (setq frame-title-format
-                   (list '(buffer-file-name "%f"
-                                            (dired-directory dired-directory "%b"))
-                         " [" (getenv "PRJ_NAME") "]"))))
+;;cef (add-hook 'after-init-hook
+;;cef           '(lambda()
+;;cef              ;; Frame title bar format
+;;cef              ;; If buffer-file-name exists, show it;
+;;cef              ;; else if you are in dired mode, show the directory name
+;;cef              ;; else show only the buffer name (*scratch*, *Messages*, etc)
+;;cef              ;; Append the value of PRJ_NAME env var to the above.
+;;cef              (setq frame-title-format
+;;cef                    (list '(buffer-file-name "%f"
+;;cef                                             (dired-directory dired-directory "%b"))
+;;cef                          " [" (getenv "PRJ_NAME") "]"))))
 
 (setq global-font-lock-mode t ;; enable font-lock or syntax highlighting globally
       font-lock-maximum-decoration t ;; use the maximum decoration level available for color highlighting

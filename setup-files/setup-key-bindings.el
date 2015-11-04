@@ -1,4 +1,4 @@
-;; Time-stamp: <2014-11-21 12:04:23 cfricano>
+;; Time-stamp: <2015-09-14 08:44:28 cfricano>
 
 ;; KEY BINDINGS
 
@@ -116,7 +116,7 @@
 (global-unset-key (kbd "<C-down-mouse-1>")) ;; it is bound to `mouse-buffer-menu'
 ;; by default. It is inconvenient when that mouse menu pops up when I don't need
 ;; it to. And actually I have never used that menu :P
-(global-set-key (kbd "<C-mouse-1>") 'font-size-reset) ;; C + left mouse click
+;;(global-set-key (kbd "<C-mouse-1>") 'font-size-reset) ;; C + left mouse click
 (global-set-key (kbd "<C-mouse-4>") 'font-size-incr) ;; C + wheel-up
 (global-set-key (kbd "<C-mouse-5>") 'font-size-decr) ;; C + wheel-down
 
@@ -350,19 +350,14 @@
   )
 
 
-;; Commented out below; now replaced with swoop, thus not needing to install
-;; helm anymore!
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; ;; helm-swoop package
+;; ;; helm
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; (when (boundp 'setup-helm-loaded)
-;;   (global-set-key (kbd "M-i") 'helm-swoop)
-;;   (global-set-key (kbd "M-I") 'helm-multi-swoop-all)
-;;   ;; (global-set-key (kbd "M-I") 'helm-swoop-back-to-last-point)
-;;   ;; When doing isearch, hand the word over to helm-swoop
-;;   (define-key isearch-mode-map (kbd "M-i") 'helm-swoop-from-isearch))
-
+(when (boundp 'setup-helm-loaded)
+  (global-set-key (kbd "C-x C-f") 'helm-find-files)  ;; find-files
+  (global-set-key (kbd "C-x b")   'helm-mini)  ;; switch-to-buffer
+)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; yasnippet package

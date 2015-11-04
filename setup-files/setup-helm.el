@@ -1,21 +1,14 @@
-;; Time-stamp: <2013-12-12 14:45:51 kmodi>
+;; Time-stamp: <2015-02-20 09:39:18 cfricano>
 
 ;; Helm Swoop
 ;; Source: https://github.com/ShingoFukuyama/helm-swoop
 
 ;; ;; helm from https://github.com/emacs-helm/helm
-;; (require 'helm-config)
-;; (helm-mode 1)
-
-;; (setq helm-ff-auto-update-initial-value nil
-;;       )
+(require 'helm)
+(require 'helm-config)
+(helm-mode 1)
 
 (require 'helm-swoop)
-
-;; Disable global helm-mode to stop it from intefering with `C-x C-f`
-;; helm-swoop still works
-(helm-mode -1)
-
 
 (setq setup-helm-loaded t)
 (provide 'setup-helm)

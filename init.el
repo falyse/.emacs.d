@@ -1,4 +1,4 @@
-;; Time-stamp: <2014-10-28 14:36:29 cfricano>
+;; Time-stamp: <2014-12-03 10:02:34 cfricano>
 ;; Original Author: Kaushal Modi
 ;; Modified By: Courtney Schmitt
 
@@ -73,7 +73,7 @@
 (require 'setup-visual)
 
 ;; Set up extensions/packages
-(eval-after-load 'ido '(require 'setup-ido))
+;;cef 12/3/2014 (eval-after-load 'ido '(require 'setup-ido))
 (require 'setup-ace-jump-mode)  ;; ace-jump-mode
 (require 'setup-auto-complete)  ;; auto-complete
 (require 'setup-dired)  ;; diredx, dired+, dired-single
@@ -127,7 +127,7 @@
 
 
 ;; NOTE: Load below ONLY after loading all the packages
-(require 'setup-workgroups)  ;; workgroups2
+;;cef 12/3/2014 (require 'setup-workgroups)  ;; workgroups2
 (require 'setup-key-bindings)
 
 ;; Load the default theme

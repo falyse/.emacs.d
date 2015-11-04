@@ -1,4 +1,4 @@
-;; Time-stamp: <2014-10-24 11:08:30 cfricano>
+;; Time-stamp: <2015-06-03 10:42:54 cfricano>
 
 ;; Miscellaneous config not categorized in other setup-* files
 
@@ -13,12 +13,12 @@
 ;; Do not make mouse wheel accelerate its action (example: scrolling)
 (setq mouse-wheel-progressive-speed nil)
 ;; Enable shell-script mode for these files automatically
-(setq auto-mode-alist
-      (append
-       '(
-         ("\\.setup\\'" . shell-script-mode)
-         ("\\.cfg\\'"   . shell-script-mode)
-         ) auto-mode-alist))
+;;cef (setq auto-mode-alist
+;;cef       (append
+;;cef        '(
+;;cef          ("\\.setup\\'" . shell-script-mode)
+;;cef          ("\\.cfg\\'"   . shell-script-mode)
+;;cef          ) auto-mode-alist))
 
 ;; Execute the script in current buffer
 ;; Source: http://ergoemacs.org/emacs/elisp_run_current_file.html
