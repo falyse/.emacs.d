@@ -1,4 +1,4 @@
-;; Time-stamp: <2014-12-03 10:02:34 cfricano>
+;; Time-stamp: <2017-08-03 08:54:45 cfricano>
 ;; Original Author: Kaushal Modi
 ;; Modified By: Courtney Schmitt
 
@@ -74,15 +74,15 @@
 
 ;; Set up extensions/packages
 ;;cef 12/3/2014 (eval-after-load 'ido '(require 'setup-ido))
-(require 'setup-ace-jump-mode)  ;; ace-jump-mode
-(require 'setup-auto-complete)  ;; auto-complete
-(require 'setup-dired)  ;; diredx, dired+, dired-single
-(require 'setup-drag-stuff)  ;; drag-stuff
+;;cef 8/3/2017 (require 'setup-ace-jump-mode)  ;; ace-jump-mode
+;;cef 8/3/2017 (require 'setup-auto-complete)  ;; auto-complete
+;;cef 8/3/2017 (require 'setup-dired)  ;; diredx, dired+, dired-single
+;;cef 8/3/2017 (require 'setup-drag-stuff)  ;; drag-stuff
 ;(require 'setup-escreen)  ;; escreen
-(require 'setup-elfeed)  ;; elfeed
-(require 'setup-expand-region)  ;; expand-region
+;;cef 8/3/2017 (require 'setup-elfeed)  ;; elfeed
+;;cef 8/3/2017 (require 'setup-expand-region)  ;; expand-region
 ;;ces (require 'setup-fci)  ;; fill-column-indicator
-(require 'setup-fiplr)  ;; fiplr
+;;cef 8/3/2017 (require 'setup-fiplr)  ;; fiplr
 (require 'setup-guide-key)  ;; guide-key
 ;;ces (require 'setup-hardcore)  ;; hardcore-mode
 ;;ces (require 'setup-header2)  ;; header2
@@ -94,7 +94,7 @@
 (require 'setup-org)  ;; org
 (require 'setup-popwin)  ;; popwin
 ;;(require 'setup-pretty-mode)  ;; pretty-mode
-(require 'setup-projectile)  ;; projectile
+;;cef 8/3/2017 (require 'setup-projectile)  ;; projectile
 ;;ces (require 'setup-server)  ;; emacs server  ;; ces using emacs --daemon instead
 ;;ces (require 'setup-smart-compile)  ;; smart-compile
 (require 'setup-smart-mode-line)  ;; smart-mode-line
@@ -131,8 +131,8 @@
 (require 'setup-key-bindings)
 
 ;; Load the default theme
-(funcall default-theme)
-(funcall 'full-screen-right)
+;;(funcall default-theme)
+;;(funcall 'full-screen-right)
 
 (setq emacs-initialized t)
 

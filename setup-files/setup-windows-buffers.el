@@ -1,4 +1,4 @@
-;; Time-stamp: <2015-11-04 14:40:17 cfricano>
+;; Time-stamp: <2017-08-03 09:10:15 cfricano>
 
 ;; Functions to manipulate windows and buffers
 
@@ -24,11 +24,11 @@
 
 ;; Set initial frame size and position
 ;; fills full screen of the left monitor
-(setq initial-frame-alist
-      '((top    . 1)
-        (left   . 1)
-        (width  . 235)
-        (height . 71)))
+;;cef 8/3/2017 (setq initial-frame-alist
+;;cef 8/3/2017       '((top    . 1)
+;;cef 8/3/2017         (left   . 1)
+;;cef 8/3/2017         (width  . 235)
+;;cef 8/3/2017         (height . 71)))
 ;; (add-to-list 'default-frame-alist '(left   . 0))
 ;; (add-to-list 'default-frame-alist '(top    . 0))
 ;; (add-to-list 'default-frame-alist '(height . 63))
@@ -162,20 +162,20 @@ Useful when you do `C-x 3` when you intended to do `C-x 2` and vice-versa."
        (setq buffer (car list))))
   (message "Refreshing open files"))
 
-;; Set the frame size to fill the left screen
-(defun full-screen-left ()
-  (interactive)
-  (set-frame-position (selected-frame) 0 0) ;; pixels x y from upper left
-  ;; (set-frame-size (selected-frame) 235 71)  ;; rows and columns w h
-  (set-frame-size (selected-frame) 209 71)  ;; rows and columns w h
-  )
-;; Set the frame size to fill the right screen
-(defun full-screen-right ()
-  (interactive)
-  (set-frame-position (selected-frame) 1920 0) ;; pixels x y from upper left
-  ;; (set-frame-size (selected-frame) 235 71)  ;; rows and columns w h
-  (set-frame-size (selected-frame) 209 71)  ;; rows and columns w h
-  )
+;;cef 8/3/2017 ;; Set the frame size to fill the left screen
+;;cef 8/3/2017 (defun full-screen-left ()
+;;cef 8/3/2017   (interactive)
+;;cef 8/3/2017   (set-frame-position (selected-frame) 0 0) ;; pixels x y from upper left
+;;cef 8/3/2017   ;; (set-frame-size (selected-frame) 235 71)  ;; rows and columns w h
+;;cef 8/3/2017   (set-frame-size (selected-frame) 209 71)  ;; rows and columns w h
+;;cef 8/3/2017   )
+;;cef 8/3/2017 ;; Set the frame size to fill the right screen
+;;cef 8/3/2017 (defun full-screen-right ()
+;;cef 8/3/2017   (interactive)
+;;cef 8/3/2017   (set-frame-position (selected-frame) 1920 0) ;; pixels x y from upper left
+;;cef 8/3/2017   ;; (set-frame-size (selected-frame) 235 71)  ;; rows and columns w h
+;;cef 8/3/2017   (set-frame-size (selected-frame) 209 71)  ;; rows and columns w h
+;;cef 8/3/2017   )
 
 ;; Set the emacs frame/window size at startup
 ;; `boundp` returns t if SYMBOL's value is not void. This prevents the frame to

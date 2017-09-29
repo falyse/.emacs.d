@@ -1,4 +1,4 @@
-;; Time-stamp: <2015-11-04 14:41:05 cfricano>
+;; Time-stamp: <2017-08-03 09:06:09 cfricano>
 
 ;; Set up the looks of emacs
 
@@ -29,19 +29,19 @@
 
 (setq default-theme       'light)
 
-;; zenburn
-(defun zenburn ()
-  "Activate zenburn theme."
-  (interactive)
-  (setq dark-theme t)
-  (setq light-theme nil)
-  ;; disable other themes before setting this theme
-  (disable-theme 'sanityinc-solarized-dark)
-  (disable-theme 'sanityinc-solarized-light)
-  (disable-theme 'sanityinc-tomorrow-blue)
-  (disable-theme 'soft-stone)
-  (load-theme    'zenburn t)
-  )
+;;cef 8/3/2017 ;; zenburn
+;;cef 8/3/2017 (defun zenburn ()
+;;cef 8/3/2017   "Activate zenburn theme."
+;;cef 8/3/2017   (interactive)
+;;cef 8/3/2017   (setq dark-theme t)
+;;cef 8/3/2017   (setq light-theme nil)
+;;cef 8/3/2017   ;; disable other themes before setting this theme
+;;cef 8/3/2017   (disable-theme 'sanityinc-solarized-dark)
+;;cef 8/3/2017   (disable-theme 'sanityinc-solarized-light)
+;;cef 8/3/2017   (disable-theme 'sanityinc-tomorrow-blue)
+;;cef 8/3/2017   (disable-theme 'soft-stone)
+;;cef 8/3/2017   (load-theme    'zenburn t)
+;;cef 8/3/2017   )
 
 ;; soft-stone
 (defun light ()
@@ -50,9 +50,9 @@
   (setq dark-theme nil)
   (setq light-theme t)
   ;; disable other themes before setting this theme
-  (disable-theme 'zenburn)
-  (disable-theme 'sanityinc-solarized-light)
-  (disable-theme 'sanityinc-solarized-dark)
+  ;;cef 8/3/2017 (disable-theme 'zenburn)
+  ;;cef 8/3/2017 (disable-theme 'sanityinc-solarized-light)
+  ;;cef 8/3/2017 (disable-theme 'sanityinc-solarized-dark)
   (disable-theme 'sanityinc-tomorrow-blue)
   (load-theme    'soft-stone)
   (setq org-todo-keyword-faces
@@ -75,9 +75,9 @@
   (setq dark-theme t)
   (setq light-theme nil)
   ;; disable other themes before setting this theme
-  (disable-theme 'zenburn)
-  (disable-theme 'sanityinc-solarized-light)
-  (disable-theme 'sanityinc-solarized-dark)
+  ;;cef 8/3/2017 (disable-theme 'zenburn)
+  ;;cef 8/3/2017 (disable-theme 'sanityinc-solarized-light)
+  ;;cef 8/3/2017 (disable-theme 'sanityinc-solarized-dark)
   (disable-theme 'soft-stone)
   (load-theme    'sanityinc-tomorrow-blue)
   (setq org-todo-keyword-faces
@@ -223,44 +223,44 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Presentation mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(setq presentation-mode-enabled nil)
-
-(defun presentation-mode ()
-  "Set frame size, theme and fonts suitable for presentation."
-  (interactive)
-  (setq font-size-pt 13)
-  (set-face-attribute 'default nil :height (* font-size-pt 10))
-  (set-frame-position (selected-frame) 0 0) ;; pixels x y from upper left
-  (set-frame-size (selected-frame) 80 25)  ;; rows and columns w h
-  (funcall default-light-theme) ;; change to default light theme
-  (delete-other-windows)
-  (setq presentation-mode-enabled t)
-  )
-
-(defun coding-zombie-mode ()
-  "Revert to default coding mode."
-  (interactive)
-  (setq font-size-pt default-font-size-pt)
-  (set-face-attribute 'default nil :height (* font-size-pt 10))
-  (full-screen-right)
-  (funcall default-theme) ;; change to default theme
-  (split-window-right)
-  (setq presentation-mode-enabled nil)
-  )
-
-(defun toggle-presentation-mode ()
-  "Toggle between presentation and default mode."
-  (interactive)
-  (if presentation-mode-enabled
-      (coding-zombie-mode)
-    (presentation-mode)))
-
-;; Coloring regions that have ANSI color codes in them
-;; http://unix.stackexchange.com/questions/19494/how-to-colorize-text-in-emacs
-(defun ansi-color-apply-on-region-int (beg end)
-  "Colorize using the ANSI color codes."
-  (interactive "r")
-  (ansi-color-apply-on-region beg end))
+;;cef 8/3/2017 (setq presentation-mode-enabled nil)
+;;cef 8/3/2017 
+;;cef 8/3/2017 (defun presentation-mode ()
+;;cef 8/3/2017   "Set frame size, theme and fonts suitable for presentation."
+;;cef 8/3/2017   (interactive)
+;;cef 8/3/2017   (setq font-size-pt 13)
+;;cef 8/3/2017   (set-face-attribute 'default nil :height (* font-size-pt 10))
+;;cef 8/3/2017   (set-frame-position (selected-frame) 0 0) ;; pixels x y from upper left
+;;cef 8/3/2017   (set-frame-size (selected-frame) 80 25)  ;; rows and columns w h
+;;cef 8/3/2017   (funcall default-light-theme) ;; change to default light theme
+;;cef 8/3/2017   (delete-other-windows)
+;;cef 8/3/2017   (setq presentation-mode-enabled t)
+;;cef 8/3/2017   )
+;;cef 8/3/2017 
+;;cef 8/3/2017 (defun coding-zombie-mode ()
+;;cef 8/3/2017   "Revert to default coding mode."
+;;cef 8/3/2017   (interactive)
+;;cef 8/3/2017   (setq font-size-pt default-font-size-pt)
+;;cef 8/3/2017   (set-face-attribute 'default nil :height (* font-size-pt 10))
+;;cef 8/3/2017   (full-screen-right)
+;;cef 8/3/2017   (funcall default-theme) ;; change to default theme
+;;cef 8/3/2017   (split-window-right)
+;;cef 8/3/2017   (setq presentation-mode-enabled nil)
+;;cef 8/3/2017   )
+;;cef 8/3/2017 
+;;cef 8/3/2017 (defun toggle-presentation-mode ()
+;;cef 8/3/2017   "Toggle between presentation and default mode."
+;;cef 8/3/2017   (interactive)
+;;cef 8/3/2017   (if presentation-mode-enabled
+;;cef 8/3/2017       (coding-zombie-mode)
+;;cef 8/3/2017     (presentation-mode)))
+;;cef 8/3/2017 
+;;cef 8/3/2017 ;; Coloring regions that have ANSI color codes in them
+;;cef 8/3/2017 ;; http://unix.stackexchange.com/questions/19494/how-to-colorize-text-in-emacs
+;;cef 8/3/2017 (defun ansi-color-apply-on-region-int (beg end)
+;;cef 8/3/2017   "Colorize using the ANSI color codes."
+;;cef 8/3/2017   (interactive "r")
+;;cef 8/3/2017   (ansi-color-apply-on-region beg end))
 
 
 (setq setup-visual-loaded t)

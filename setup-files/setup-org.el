@@ -1,4 +1,4 @@
-;; Time-stamp: <2015-07-16 13:52:48 cfricano>
+;; Time-stamp: <2016-11-14 06:27:59 cfricano>
 
 ;; Org Mode
 
@@ -215,6 +215,13 @@ this with to-do items than with projects or headings."
                 ;       (org-agenda-skip-function 
                 ;        (quote (org-agenda-skip-entry-if (quote todo) (quote done) (quote scheduled))))
                 ;       (org-agenda-files (quote ("~/org/tesla.org"))) ))
+                (tags-todo "ILV"
+                      ((org-agenda-overriding-header "ILV")
+                       (org-tags-match-list-sublevels 'indented)
+                       (org-agenda-sorting-strategy '(category-keep))
+                       (org-agenda-skip-function 
+                        (quote (org-agenda-skip-entry-if (quote todo) (quote done) (quote scheduled))))
+                       (org-agenda-files (quote ("~/org/ilv.org"))) ))
                 (tags-todo "TBG"
                       ((org-agenda-overriding-header "TBG")
                        (org-tags-match-list-sublevels 'indented)
@@ -255,21 +262,21 @@ this with to-do items than with projects or headings."
                 )
                nil)
               ("d" "Delegated Tasks"
-               ((tags-todo "+Ashar"
-                      ((org-agenda-overriding-header "Ashar")
+               ((tags-todo "+Sreeveni"
+                      ((org-agenda-overriding-header "Sreeveni")
                        (org-tags-match-list-sublevels 'indented)
                        (org-agenda-sorting-strategy '(category-keep))
                        (org-agenda-skip-function 
                         (quote (org-agenda-skip-entry-if (quote todo) (quote done) (quote scheduled))))
                        (org-agenda-files '("~/org/delegated.org")) ))
-                (tags-todo "+Don"
-                      ((org-agenda-overriding-header "Don")
+                (tags-todo "+Edward"
+                      ((org-agenda-overriding-header "Edward")
                        (org-tags-match-list-sublevels 'indented)
                        (org-agenda-sorting-strategy '(category-keep))
                        (org-agenda-skip-function 
                         (quote (org-agenda-skip-entry-if (quote todo) (quote done) (quote scheduled))))
                        (org-agenda-files '("~/org/delegated.org")) ))
-                (tags-todo "-Ashar-Don/!"
+                (tags-todo "-Sreeveni-Edward/!"
                       ((org-agenda-overriding-header "Other")
                        (org-tags-match-list-sublevels 'indented)
                        (org-agenda-sorting-strategy '(priority-down category-keep))
@@ -594,7 +601,7 @@ this with to-do items than with projects or headings."
 (setq org-refile-target-verify-function 'bh/verify-refile-target)
 
 
-(setq org-agenda-files all-org-files)
+;(setq org-agenda-files all-org-files)
 
 
 (setq setup-org-loaded t)

@@ -1,4 +1,4 @@
-;; Time-stamp: <2015-09-14 08:44:28 cfricano>
+;; Time-stamp: <2017-02-19 11:06:44 cfricano>
 
 ;; KEY BINDINGS
 
@@ -134,8 +134,8 @@
 (global-set-key (kbd "C-c t")     'toggle-window-split) ;; convert between horz-split <-> vert-split
 (global-set-key (kbd "C-c s")     'rotate-windows) ;; rotate windows clockwise. This will do the act of swapping windows if the frame is split into only 2 windows
 
-(global-set-key (kbd "<C-S-left>")  'full-screen-left)  ;; maximize window on left monitor
-(global-set-key (kbd "<C-S-right>") 'full-screen-right) ;; maximize window on right monitor
+;; (global-set-key (kbd "<C-S-left>")  'full-screen-left)  ;; maximize window on left monitor
+;; (global-set-key (kbd "<C-S-right>") 'full-screen-right) ;; maximize window on right monitor
 
 
 (global-set-key (kbd "C-x C-b")   'ibuffer) ;; replace buffer-menu with ibuffer
