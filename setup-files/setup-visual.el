@@ -1,4 +1,4 @@
-;; Time-stamp: <2017-08-03 09:06:09 cfricano>
+;; Time-stamp: <2017-09-29 14:56:24 cfricano>
 
 ;; Set up the looks of emacs
 
@@ -29,32 +29,18 @@
 
 (setq default-theme       'light)
 
-;;cef 8/3/2017 ;; zenburn
-;;cef 8/3/2017 (defun zenburn ()
-;;cef 8/3/2017   "Activate zenburn theme."
-;;cef 8/3/2017   (interactive)
-;;cef 8/3/2017   (setq dark-theme t)
-;;cef 8/3/2017   (setq light-theme nil)
-;;cef 8/3/2017   ;; disable other themes before setting this theme
-;;cef 8/3/2017   (disable-theme 'sanityinc-solarized-dark)
-;;cef 8/3/2017   (disable-theme 'sanityinc-solarized-light)
-;;cef 8/3/2017   (disable-theme 'sanityinc-tomorrow-blue)
-;;cef 8/3/2017   (disable-theme 'soft-stone)
-;;cef 8/3/2017   (load-theme    'zenburn t)
-;;cef 8/3/2017   )
-
 ;; soft-stone
+;; dichromacy
+;; 
+
 (defun light ()
-  "Activate soft-stone theme."
+  "Activate light theme."
   (interactive)
   (setq dark-theme nil)
   (setq light-theme t)
   ;; disable other themes before setting this theme
-  ;;cef 8/3/2017 (disable-theme 'zenburn)
-  ;;cef 8/3/2017 (disable-theme 'sanityinc-solarized-light)
-  ;;cef 8/3/2017 (disable-theme 'sanityinc-solarized-dark)
   (disable-theme 'sanityinc-tomorrow-blue)
-  (load-theme    'soft-stone)
+  (load-theme    'dichromacy)
   (setq org-todo-keyword-faces
         (quote (("TODO" :foreground "red" :weight bold)
                 ("NEXT" :foreground "blue" :weight bold)
@@ -62,23 +48,15 @@
                 ("WAITING" :foreground "orange" :weight bold)
                 ("HOLD" :foreground "burlywood" :weight bold)
                 ("CANCELED" :foreground "forest green" :weight bold))))
-  ;; (setq ansi-color-names-vector
-        ;; ["black" "red" "ForestGreen" "gold1" "blue" "MediumOrchid1" "RoyalBlue" "white"])
-  ;; (when (fboundp 'ansi-color-make-color-map)
-      ;; (setq ansi-color-map (ansi-color-make-color-map)))
   )
 
-;; tomorrow-blue
 (defun dark ()
-  "Activate tomorrow-blue theme."
+  "Activate dark theme."
   (interactive)
   (setq dark-theme t)
   (setq light-theme nil)
   ;; disable other themes before setting this theme
-  ;;cef 8/3/2017 (disable-theme 'zenburn)
-  ;;cef 8/3/2017 (disable-theme 'sanityinc-solarized-light)
-  ;;cef 8/3/2017 (disable-theme 'sanityinc-solarized-dark)
-  (disable-theme 'soft-stone)
+  (disable-theme 'dichromacy)
   (load-theme    'sanityinc-tomorrow-blue)
   (setq org-todo-keyword-faces
         (quote (("TODO" :foreground "salmon" :weight bold)
@@ -87,9 +65,6 @@
                 ("WAITING" :foreground "lightgoldenrod" :weight bold)
                 ("HOLD" :foreground "burlywood" :weight bold)
                 ("CANCELED" :foreground "pale green" :weight bold))))
-;;  ;; (setq ansi-color-names-vector
-;;        ;; ["black" "red" "green" "yellow" "blue" "magenta" "cyan" "white"])
-;;  ;; (setq ansi-color-map (ansi-color-make-color-map)) 
   )
 
 ;; Load the theme ONLY after the frame has finished loading (needed especially
@@ -100,16 +75,6 @@
                (funcall default-theme)))
 
 ;;cef (add-hook 'after-init-hook
-;;cef           '(lambda()
-;;cef              ;; Frame title bar format
-;;cef              ;; If buffer-file-name exists, show it;
-;;cef              ;; else if you are in dired mode, show the directory name
-;;cef              ;; else show only the buffer name (*scratch*, *Messages*, etc)
-;;cef              ;; Append the value of PRJ_NAME env var to the above.
-;;cef              (setq frame-title-format
-;;cef                    (list '(buffer-file-name "%f"
-;;cef                                             (dired-directory dired-directory "%b"))
-;;cef                          " [" (getenv "PRJ_NAME") "]"))))
 
 (setq global-font-lock-mode t ;; enable font-lock or syntax highlighting globally
       font-lock-maximum-decoration t ;; use the maximum decoration level available for color highlighting
