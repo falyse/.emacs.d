@@ -1,8 +1,15 @@
-;; Time-stamp: <2017-08-03 08:54:45 cfricano>
+;; Time-stamp: <2017-10-20 08:08:28 cfricano>
 ;; Original Author: Kaushal Modi
 ;; Modified By: Courtney Schmitt
 
 ;; Record the start time
+
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
+
 (defvar *emacs-load-start* (current-time))
 
 ;; Global variables (symbols)
@@ -39,6 +46,7 @@
     hl-line+  ;; Highlight current line after idle period
     ido-vertical-mode flx-ido  ;; Display buffer messages vertically
     load-theme-buffer-local  ;; Set background color per buffer
+    log4j-mode  ;; Line coloring and filtering for log files
     markdown-mode  ;; Markdown syntax mode
     multiple-cursors  ;; Visually edit multiple cursors at once
     multi-eshell  ;; Better management of multiple shells
@@ -102,6 +110,7 @@
 (require 'setup-stripe-buffer)  ;; stripe-buffer
 (require 'setup-yafolding)
 ;;cef (require 'setup-yasnippet)  ;; yasnippet
+(require 'setup-log)
 
 ;; Languages
 (require 'setup-verilog)

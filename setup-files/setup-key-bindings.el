@@ -1,4 +1,4 @@
-;; Time-stamp: <2017-02-19 11:06:44 cfricano>
+;; Time-stamp: <2017-10-20 08:24:01 cfricano>
 
 ;; KEY BINDINGS
 
@@ -146,8 +146,10 @@
   (global-set-key (kbd "C-x C-k") 'delete-current-buffer-file)
   (global-set-key (kbd "C-x C-r") 'rename-current-buffer-file)
   (define-key modi-map (kbd "b")  'switch-to-scratch-and-back) ;; C-x m b
-  ;; overriding the `C-x C-o` binding with `delete-blank-lines'
-  (global-set-key (kbd "C-x C-o")   'ido-find-recentf)
+
+  ;;(global-set-key (kbd "C-x C-o")   'ido-find-recentf)
+  (global-set-key (kbd "C-x C-o")   'helm-recentf)
+  
   (define-key modi-map (kbd "l")    'load-current-file) ;; C-x m l
   (global-set-key (kbd "C-S-t")     'undo-kill-buffer) ;; same shortcut as for reopening closed tabs in browsers
   (global-set-key (kbd "<M-up>")    'scroll-down-dont-move-point)
