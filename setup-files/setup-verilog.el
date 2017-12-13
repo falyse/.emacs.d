@@ -1,4 +1,4 @@
-;; Time-stamp: <2014-10-27 16:04:10 cfricano>
+;; Time-stamp: <2017-11-03 07:44:51 cfricano>
 
 ;; Verilog
 
@@ -14,6 +14,10 @@
 (setq auto-mode-alist (cons '("\\.h\\'"    . verilog-mode) auto-mode-alist))
 (setq auto-mode-alist (cons '("\\.f\\'"    . verilog-mode) auto-mode-alist))
 (setq auto-mode-alist (cons '("\\.vinc\\'" . verilog-mode) auto-mode-alist))
+
+;; Load trek files in c-mode
+(setq auto-mode-alist (cons '("\\.trek\\'"  . c-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("\\.trekh\\'" . c-mode) auto-mode-alist))
 
 ;; Replace tabs with spaces when saving files in verilog-mode
 ;;ces (add-hook 'verilog-mode-hook

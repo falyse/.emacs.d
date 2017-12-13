@@ -1,4 +1,4 @@
-;; Time-stamp: <2015-06-03 10:42:54 cfricano>
+;; Time-stamp: <2017-11-13 07:41:28 cfricano>
 
 ;; Miscellaneous config not categorized in other setup-* files
 
@@ -125,6 +125,12 @@ If the file is emacs lisp, run the byte compiled version if exist."
           (buffer-substring-no-properties
            (setcar ffap-string-at-point-region beg)
            (setcar (cdr ffap-string-at-point-region) end)))))
+
+
+
+; Smart parenthesis
+(require 'smartparens-config)
+(add-hook 'cperl-mode-hook #'smartparens-mode)
 
 
 (setq setup-misc-loaded t)

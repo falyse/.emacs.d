@@ -1,4 +1,4 @@
-;; Time-stamp: <2014-05-12 10:59:41 cschmitt>
+;; Time-stamp: <2017-11-20 09:49:56 cfricano>
 
 ;; Perl
 
@@ -36,16 +36,65 @@
  )
 
 ; Indentation
-(setq cperl-indent-level 4)
-(setq cperl-brace-offset 0)
-(setq cperl-continued-brace-offset -4)
-(setq cperl-label-offset -4)
-(setq cperl-continued-statement-offset 4)
+(defun perl-indent-normal()
+  (interactive)
+  (setq cperl-indent-level 4)
+  (setq cperl-brace-offset 0)
+  (setq cperl-continued-brace-offset -4)
+  (setq cperl-label-offset -4)
+  (setq cperl-continued-statement-offset 4))
+
+(defun perl-indent-small()
+  (interactive)
+  (setq cperl-indent-level 2)
+  (setq cperl-brace-offset 0)
+  (setq cperl-continued-brace-offset -2)
+  (setq cperl-label-offset -2)
+  (setq cperl-continued-statement-offset 2))
+
+(perl-indent-normal)
+  
 ;                                    K&R BSD=C++ GNU PerlStyle=Whitesmith
 ;  cperl-indent-level                5   4       2   4
 ;  cperl-brace-offset                0   0       0   0
 ;  cperl-continued-brace-offset     -5  -4       0   0
 ;  cperl-label-offset               -5  -4      -2  -4
 ;  cperl-continued-statement-offset  5   4       2   4
+
+
+
+; Outline minor mode
+;(require 'outshine)
+;(add-hook 'outline-minor-mode-hook 'outshine-hook-function)
+;(defmacro join (join-char &rest others) `(mapconcat 'identity ',others ,join-char))
+;(setq my-cperl-outline-regexp
+;      (concat
+;       "^"                              ; Start of line
+;       "[ \\t]*"                        ; Skip leading whitespace
+;       "\\("                            ; begin capture group \1
+;       (join "\\|"
+;             "=head[12]"                  ; POD header
+;             "package"                    ; package
+;             "=item"                      ; POD item
+;             "sub"                        ; subroutine definition
+;           )
+;       "\\)"                            ; end capture group \1
+;       "\\b"                            ; Word boundary
+;       ))
+
+; Hide-Show minor mode
+;(add-hook 'cperl-mode-hook       'hs-minor-mode)
+;(require 'fold-dwim)
+
+; Dumb-jump - TODO move elsewhere
+;(setq dumb-jump-default-project "~/adsim_dev/adsim")
+;(setq dumb-jump-force-searcher 'ag)
+(setq dumb-jump-selector 'helm)
+
+; Display containing function in mode line
+(which-function-mode 1)
+
+; Superword minor mode
+(add-hook 'cperl-mode-hook       'superword-mode)
 
 (provide 'setup-perl)

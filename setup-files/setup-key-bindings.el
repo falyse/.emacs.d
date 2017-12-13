@@ -1,4 +1,4 @@
-;; Time-stamp: <2017-10-20 08:24:01 cfricano>
+;; Time-stamp: <2017-11-13 10:11:27 cfricano>
 
 ;; KEY BINDINGS
 
@@ -289,14 +289,28 @@
   (global-set-key (kbd "C-c r")      'anzu-replace-at-cursor-thing)
 
   ;; swoop
-  (global-set-key (kbd "M-i")   'swoop)
-  (global-set-key (kbd "M-I")   'swoop-multi)
-  (global-set-key (kbd "M-o")   'swoop-pcre-regexp)
+  ;; https://github.com/ShingoFukuyama/helm-swoop
+  ;; (global-set-key (kbd "M-i")   'swoop)
+  ;; (global-set-key (kbd "M-I")   'swoop-multi)
+  ;; (global-set-key (kbd "M-o")   'swoop-pcre-regexp)
+  (global-set-key (kbd "M-i") 'helm-swoop)
+  ;; (global-set-key (kbd "M-I") 'helm-swoop-back-to-last-point)
+  (global-set-key (kbd "M-I") 'helm-swoop-without-pre-input)
+  (global-set-key (kbd "C-c M-i") 'helm-multi-swoop)
+  (global-set-key (kbd "C-x M-i") 'helm-multi-swoop-all)
   ;; Transition
   ;; isearch     > press [C-o] > swoop
-  (define-key isearch-mode-map (kbd "C-o")      'swoop-from-isearch)
+  ;; (define-key isearch-mode-map (kbd "C-o")      'swoop-from-isearch)
+  (define-key isearch-mode-map (kbd "M-i") 'helm-swoop-from-isearch)
   ;; swoop       > press [C-o] > swoop-multi
-  (define-key swoop-map (kbd "C-o")             'swoop-multi-from-swoop)
+  ;; (define-key swoop-map (kbd "C-o")             'swoop-multi-from-swoop)
+  (define-key helm-swoop-map (kbd "M-i") 'helm-multi-swoop-all-from-helm-swoop)
+  (define-key helm-swoop-map (kbd "M-m") 'helm-multi-swoop-current-mode-from-helm-swoop)
+  ;; Move up and down like isearch
+  (define-key helm-swoop-map (kbd "C-r") 'helm-previous-line)
+  (define-key helm-swoop-map (kbd "C-s") 'helm-next-line)
+  (define-key helm-multi-swoop-map (kbd "C-r") 'helm-previous-line)
+  (define-key helm-multi-swoop-map (kbd "C-s") 'helm-next-line)
   ;; Resume
   ;; C-u M-x swoop : Use last used query
   ;; Swoop Edit Mode
@@ -353,12 +367,14 @@
 
 
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; ;; helm
+;; ;; helm overrides
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (when (boundp 'setup-helm-loaded)
   (global-set-key (kbd "C-x C-f") 'helm-find-files)  ;; find-files
-  (global-set-key (kbd "C-x b")   'helm-mini)  ;; switch-to-buffer
+  ;(global-set-key (kbd "C-x b")   'helm-mini)  ;; switch-to-buffer
+  (global-set-key (kbd "C-x b")   'helm-for-files)  ;; switch-to-buffer
+  (global-set-key (kbd "M-s o")   'helm-occur)  ;; occur
 )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -464,6 +480,19 @@
   )
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Code Folding
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(global-set-key (kbd "C-x x")      'fold-dwim-toggle)
+(global-set-key (kbd "C-x X")    'fold-dwim-hide-all)
+(global-set-key (kbd "C-x M-x")  'fold-dwim-show-all)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Jump to last change
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(global-set-key (kbd "C-x C-/") 'goto-last-change)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; other

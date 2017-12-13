@@ -1,4 +1,4 @@
-;; Time-stamp: <2017-10-20 08:08:28 cfricano>
+;; Time-stamp: <2017-11-13 10:12:36 cfricano>
 ;; Original Author: Kaushal Modi
 ;; Modified By: Courtney Schmitt
 
@@ -38,6 +38,10 @@
     expand-region  ;; Expand selected region around cursor (C-=)
     fill-column-indicator  ;; Add markers in emacs to indicate were the fill column occurs
     fiplr ;; quick file search in a project (marked by folders like .git)
+    flycheck  ;; on the fly code compiling
+    ;flymake  ;; on the fly code compiling
+    fold-dwim  ;; code folding
+    goto-last-change  ;; jump to last edit position
     guide-key  ;; Display prompts for key bindings specified in setup-guide-key.el
     hardcore-mode  ;; Disable arrow keys and display emacs key bindings instead
     header2  ;; Auto-insert and auto-update headers as defined in setup-header2.el
@@ -60,6 +64,7 @@
     shell-switcher  ;; Better management of multiple shells
     smart-compile  ;; Compile for C programs
     smart-mode-line  ;; Customize emacs mode line
+    smart-parens  ;; Easier parentheses navigation
     smex ;; smart M-x - Supply frequently and recently used commands
     soft-stone-theme  ;; Soft stone color theme
     stripe-buffer  ;; Use different background colors for even/odd lines in dired mode
@@ -133,6 +138,7 @@
 (require 'setup-misc)
 (require 'setup-shell)  ;; ces - customize built in shell to behave more like actual terminal
 (require 'setup-registers)
+(require 'setup-flymake)
 
 
 ;; NOTE: Load below ONLY after loading all the packages
