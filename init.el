@@ -1,4 +1,4 @@
-;; Time-stamp: <2017-11-13 10:12:36 cfricano>
+;; Time-stamp: <2017-12-13 16:47:09 cfricano>
 ;; Original Author: Kaushal Modi
 ;; Modified By: Courtney Schmitt
 
@@ -46,6 +46,7 @@
     hardcore-mode  ;; Disable arrow keys and display emacs key bindings instead
     header2  ;; Auto-insert and auto-update headers as defined in setup-header2.el
     helm helm-swoop  ;; Show search results in new buffer (M-i)
+    helm-projectile ;; Helm integration for projectile
     highlight-symbol  ;; Highlight/search word under cursor
     hl-line+  ;; Highlight current line after idle period
     ido-vertical-mode flx-ido  ;; Display buffer messages vertically
@@ -56,6 +57,10 @@
     multi-eshell  ;; Better management of multiple shells
     multi-term  ;; Better management of multiple terminals
     org ;; Get the latest org-mode package from Melpa
+    paradox ;; Better package manager
+    ;perspective ;; Workspace management
+    ;persp-projectile ;; Perspective + projectile
+    ;persp-mode ;; Workspace management
     popwin ;; Open windows like *Help*, *Completions*, etc in minibuffer
     pretty-mode ;; Replace some text with equivalent symbols
     projectile  ;; Project management
@@ -107,7 +112,7 @@
 (require 'setup-org)  ;; org
 (require 'setup-popwin)  ;; popwin
 ;;(require 'setup-pretty-mode)  ;; pretty-mode
-;;cef 8/3/2017 (require 'setup-projectile)  ;; projectile
+(require 'setup-projectile)  ;; projectile
 ;;ces (require 'setup-server)  ;; emacs server  ;; ces using emacs --daemon instead
 ;;ces (require 'setup-smart-compile)  ;; smart-compile
 (require 'setup-smart-mode-line)  ;; smart-mode-line

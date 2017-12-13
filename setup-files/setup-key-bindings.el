@@ -1,5 +1,3 @@
-;; Time-stamp: <2017-11-13 10:11:27 cfricano>
-
 ;; KEY BINDINGS
 
 ;; The way to figure out how to type a particular key combination or to know
@@ -372,10 +370,12 @@
 
 (when (boundp 'setup-helm-loaded)
   (global-set-key (kbd "C-x C-f") 'helm-find-files)  ;; find-files
-  ;(global-set-key (kbd "C-x b")   'helm-mini)  ;; switch-to-buffer
   (global-set-key (kbd "C-x b")   'helm-for-files)  ;; switch-to-buffer
+  ;(global-set-key (kbd "C-x b")   'persp-helm-for-files)  ;; switch-to-buffer
   (global-set-key (kbd "M-s o")   'helm-occur)  ;; occur
-)
+  ;(global-set-key (kbd "C-x k")   'persp-kill-buffer)
+  (global-set-key (kbd "C-x f")   'helm-projectile)
+  )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; yasnippet package

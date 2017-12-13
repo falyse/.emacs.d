@@ -1,4 +1,4 @@
-;; Time-stamp: <2017-08-03 09:10:15 cfricano>
+;; Time-stamp: <2017-12-13 13:25:16 cfricano>
 
 ;; Functions to manipulate windows and buffers
 
@@ -271,6 +271,33 @@ Useful when you do `C-x 3` when you intended to do `C-x 2` and vice-versa."
   (interactive)
   (scroll-other-window -1))
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Persp-mode workspace management via perspectives
+;(persp-mode)
+;
+;;; see documentation for other possible values
+;(setq persp-add-buffer-on-after-change-major-mode t)
+;
+;;; above setting will not discriminate and bring ephemeral buffers e.g.
+;;; *magit* which you probably don't want. You can filter them out.
+;(add-hook 'persp-common-buffer-filter-functions
+;;; there is also `persp-add-buffer-on-after-change-major-mode-filter-functions'
+;    #'(lambda (b) (string-prefix-p "*" (buffer-name b))))
+;
+;(defun persp-helm-mini ()
+;  "As `helm-mini' but restricts visible buffers by perspective."
+;  (interactive)
+;  (with-persp-buffer-list ()
+;                          (helm-mini)))
+;
+;(defun persp-helm-for-files ()
+;  "As `helm-for-files' but restricts visible buffers by perspective."
+;  (interactive)
+;  (with-persp-buffer-list ()
+;                          (helm-for-files)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (setq setup-windows-buffers-loaded t)
 (provide 'setup-windows-buffers)
