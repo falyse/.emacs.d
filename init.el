@@ -64,7 +64,7 @@
     shell-switcher  ;; Better management of multiple shells
     smart-compile  ;; Compile for C programs
     smart-mode-line  ;; Customize emacs mode line
-    smart-parens  ;; Easier parentheses navigation
+    ;smart-parens  ;; Easier parentheses navigation
     smex ;; smart M-x - Supply frequently and recently used commands
     soft-stone-theme  ;; Soft stone color theme
     stripe-buffer  ;; Use different background colors for even/odd lines in dired mode

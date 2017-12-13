@@ -44,9 +44,14 @@
  '(keyboard-coding-system (quote utf-8-unix) nil nil "default EOL system = that of Unix")
  '(major-mode (quote text-mode) nil nil "If the default value of major-mode is nil, the major mode is taken from the previously current buffer")
  '(next-line-add-newlines nil nil nil "Do not auto-add newlines at the end of the file on pressing `C-n` or down arrow")
+ '(package-selected-packages
+   (quote
+    (smart-parens zenburn-theme yasnippet yaml-mode yafolding xkcd wrap-region workgroups2 wgrep-ag web-mode w3m volatile-highlights visual-regexp undo-tree swoop stripe-buffer soft-stone-theme smex smartparens smart-mode-line smart-compile shell-switcher req-package region-bindings-mode rainbow-mode rainbow-delimiters projectile pretty-mode poporg perlcritic page-break-lines ox-reveal outshine number nlinum names mwe-log-commands multiple-cursors multi-term multi-eshell markdown-mode manage-minor-mode magit log4j-mode load-theme-buffer-local leuven-theme key-chord iy-go-to-char iregister ido-vertical-mode ido-ubiquitous hungry-delete htmlize hl-line+ highlight-symbol helm-swoop header2 hardcore-mode guide-key goto-last-change github-theme git-rebase-mode git-commit-mode ggtags fuzzy fold-dwim flymake-cursor flycheck-color-mode-line flx-ido flatui-theme fiplr fill-column-indicator expand-region escreen elisp-slime-nav elfeed eimp dumb-jump drag-stuff discover-my-major discover dired-single dired+ csv-nav color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized cmake-mode buffer-move bookmark+ benchmark-init auto-highlight-symbol auto-complete auctex anzu ag ace-window ace-jump-mode ace-jump-buffer)))
  '(protect-buffer-bury-p nil t)
  '(require-final-newline nil nil nil "Do not auto-add a final newline (if one is not present) when saving/visiting a file")
  '(save-place t nil (saveplace) "save the last cursor location for each file")
+ '(select-enable-clipboard t nil nil "after copy Ctrl+c in X11 apps, you can paste by 'yank' in emacs")
+ '(select-enable-primary t nil nil "after mouse selection in X11, you can paste by 'yank' in emacs")
  '(show-paren-mode t nil (paren) "allow one to see matching pairs of parentheses; when point is on one of the paired characters, the other is highlighted")
  '(tool-bar-mode nil)
  '(vc-annotate-background "#2B2B2B" t)
@@ -71,9 +76,7 @@
      (340 . "#94BFF3")
      (360 . "#DC8CC3"))) t)
  '(vc-annotate-very-old-color "#DC8CC3" t)
- '(visible-bell t nil nil "enable the visible bell or screen blink to happen when there's any error")
- '(x-select-enable-clipboard t nil nil "after copy Ctrl+c in X11 apps, you can paste by 'yank' in emacs")
- '(x-select-enable-primary t nil nil "after mouse selection in X11, you can paste by 'yank' in emacs"))
+ '(visible-bell t nil nil "enable the visible bell or screen blink to happen when there's any error"))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
