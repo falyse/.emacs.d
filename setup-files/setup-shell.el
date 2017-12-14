@@ -117,10 +117,17 @@ http://comments.gmane.org/gmane.emacs.bugs/39082"
 
 ;; -------------------------------------------------
 ;; shell-switcher setup
-(require 'shell-switcher)
-(setq shell-switcher-mode t)
-(setq shell-switcher-new-shell-function 'shell-switcher-make-shell)
+;(require 'shell-switcher)
+;(setq shell-switcher-mode t)
+;(setq shell-switcher-new-shell-function 'shell-switcher-make-shell)
 
+
+;; -------------------------------------------------
+; start term in line mode
+(defadvice ansi-term (after advice-term-line-mode activate)
+  (term-line-mode))
+(defadvice term (after advice-term-line-mode activate)
+  (term-line-mode))
 
 (setq setup-shell-loaded t)
 (provide 'setup-shell)

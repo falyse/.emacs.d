@@ -1,4 +1,4 @@
-;; Time-stamp: <2017-12-13 19:16:32 cfricano>
+;; Time-stamp: <2017-12-13 20:51:54 cfricano>
 
 ;; Projectile
 ;; Source: https://github.com/bbatsov/projectile
@@ -7,6 +7,9 @@
 
 ; helm completion
 (setq projectile-completion-system 'helm)
+
+; when switching projects, bring up helm buffer list instead of default find file
+(setq projectile-switch-project-action 'helm-projectile)
 
 ; customize mode line
 ;(eval-after-load "projectile"
