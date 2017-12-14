@@ -14,7 +14,7 @@
  '(ansi-color-faces-vector
    [default bold shadow italic underline bold bold-italic bold])
  '(ansi-color-names-vector
-   ["#ffffff" "tomato" "lime green" "gold1" "blue" "MediumOrchid1" "cyan" "#002451"])
+   ["#ffffff" "tomato" "lime green" "gold1" "blue" "MediumOrchid1" "deep sky blue" "#002451"])
  '(auto-compression-mode t nil (jka-compr) "uncompress->edit->save->compress .gz, .bz2, .Z files on the fly")
  '(blink-cursor-mode nil)
  '(bmkp-last-as-first-bookmark-file "~/.emacs.d/bookmarks" t)

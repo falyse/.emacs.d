@@ -1,12 +1,13 @@
-;; Time-stamp: <2017-12-14 09:37:27 cfricano>
+;; Time-stamp: <2017-12-14 10:47:10 cfricano>
 
 ;; Projectile
 ;; Source: https://github.com/bbatsov/projectile
 
 (require 'projectile)
 
-; use C-x p for prefix instead of C-c p
-(setq projectile-keymap-prefix (kbd "C-x p"))
+; use C-x p for projectile prefix instead of C-c p
+(define-key projectile-mode-map projectile-keymap-prefix nil)
+(define-key projectile-mode-map (kbd "C-x p") #'projectile-command-map)
 
 ; helm completion
 (setq projectile-completion-system 'helm)
