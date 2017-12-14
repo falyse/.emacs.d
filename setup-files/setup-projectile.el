@@ -1,9 +1,12 @@
-;; Time-stamp: <2017-12-13 20:51:54 cfricano>
+;; Time-stamp: <2017-12-14 09:37:27 cfricano>
 
 ;; Projectile
 ;; Source: https://github.com/bbatsov/projectile
 
 (require 'projectile)
+
+; use C-x p for prefix instead of C-c p
+(setq projectile-keymap-prefix (kbd "C-x p"))
 
 ; helm completion
 (setq projectile-completion-system 'helm)
@@ -33,6 +36,25 @@
 (require 'helm-projectile)
 (helm-projectile-on)
 
+
+; term integration via term-projectile
+; override this function to use ansi-term instead of term
+;(require 'term-projectile)
+;(defun term-manager-default-build-term (directory-symbol)
+;     (let* ((directory (symbol-name directory-symbol))
+;            (default-directory directory)
+;            (program (getenv "SHELL"))
+;            (buffer (get-buffer
+;                     ;; We need to use a name that is guaranteed to be
+;                     ;; unique so that term-ansi-make-term always makes a
+;                     ;; new term.
+;                     ;cef use ansi-term instead of term to enable C-x prefix
+;                     ;cef (term-ansi-make-term "new term temp name" program))))
+;                     (shell))))
+;       ;cef (with-current-buffer buffer
+;       ;cef   (term-mode)
+;       ;cef   (term-char-mode))
+;       buffer))
 
 ; perspective integration for workspace management
 ;(require 'persp-projectile)

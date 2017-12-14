@@ -1,4 +1,4 @@
-;; Time-stamp: <2017-09-29 14:56:24 cfricano>
+;; Time-stamp: <2017-12-14 09:00:03 cfricano>
 
 ;; Set up the looks of emacs
 
@@ -87,8 +87,8 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Different background for shells
-(add-hook 'shell-mode-hook (lambda nil
-   (load-theme-buffer-local 'dichromacy (current-buffer))))
+;(add-hook 'shell-mode-hook (lambda nil
+;   (load-theme-buffer-local 'dichromacy (current-buffer))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

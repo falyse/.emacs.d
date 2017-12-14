@@ -498,9 +498,10 @@
 ;; Shell
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(global-set-key (kbd "C-x t") 'term-projectile-create-new)
-(global-set-key (kbd "C-x T") 'rename-buffer)
-(global-set-key (kbd "C-x g") 'term-projectile-switch-to)
+(global-set-key (kbd "C-:") 'shell)
+(global-set-key (kbd "C-;") (kbd "C-u C-:"))  ; force new shell
+(global-set-key (kbd "C-'") 'rename-buffer)
+;(global-set-key (kbd "C-x g") 'term-projectile-switch-to)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; other

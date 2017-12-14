@@ -42,9 +42,11 @@
 ;;ces     (dirtrack-mode 1)))
 ;;ces (add-hook 'shell-mode-hook 'my-dirtrack-mode)
 
+
 ; interpret and use ansi color codes in shell output windows
-(setq ansi-color-map (ansi-color-make-color-map))
-(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+;(setq ansi-color-map (ansi-color-make-color-map))
+;(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+;cef Use M-x customize-variable RET ansi-color-names-vector RET instead
 
 (defun set-scroll-conservatively ()
   "Add to shell-mode-hook to prevent jump-scrolling on newlines in shell buffers."
@@ -112,8 +114,8 @@ http://comments.gmane.org/gmane.emacs.bugs/39082"
 
 ;; -------------------------------------------------
 ;; multi-eshell setup
-;;(require 'multi-eshell)
-;;(defvar multi-eshell-function `(shell) )
+;(require 'multi-eshell)
+;(defvar multi-eshell-function `(shell) )
 
 ;; -------------------------------------------------
 ;; shell-switcher setup
@@ -124,10 +126,10 @@ http://comments.gmane.org/gmane.emacs.bugs/39082"
 
 ;; -------------------------------------------------
 ; start term in line mode
-(defadvice ansi-term (after advice-term-line-mode activate)
-  (term-line-mode))
-(defadvice term (after advice-term-line-mode activate)
-  (term-line-mode))
+;(defadvice ansi-term (after advice-term-line-mode activate)
+;  (term-line-mode))
+;(defadvice term (after advice-term-line-mode activate)
+;  (term-line-mode))
 
 (setq setup-shell-loaded t)
 (provide 'setup-shell)
