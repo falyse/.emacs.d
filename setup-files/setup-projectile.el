@@ -1,4 +1,4 @@
-;; Time-stamp: <2017-12-13 16:23:02 cfricano>
+;; Time-stamp: <2017-12-13 19:16:32 cfricano>
 
 ;; Projectile
 ;; Source: https://github.com/bbatsov/projectile
@@ -9,11 +9,16 @@
 (setq projectile-completion-system 'helm)
 
 ; customize mode line
+;(eval-after-load "projectile"
+;  '(setq projectile-mode-line
+;         '(:eval (list " [Proj:"
+;                       (propertize (projectile-project-name)
+;                                   'face '(:foreground "green"))
+;                       "]"))))
 (eval-after-load "projectile"
   '(setq projectile-mode-line
-         '(:eval (list " [Proj:"
-                       (propertize (projectile-project-name)
-                                   'face '(:foreground "green"))
+         '(:eval (list " ["
+                       (projectile-project-name)
                        "]"))))
 
 ; enable everywhere

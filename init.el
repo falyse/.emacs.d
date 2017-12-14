@@ -1,4 +1,4 @@
-;; Time-stamp: <2017-12-13 16:47:09 cfricano>
+;; Time-stamp: <2017-12-13 19:37:05 cfricano>
 ;; Original Author: Kaushal Modi
 ;; Modified By: Courtney Schmitt
 
@@ -31,6 +31,7 @@
     benchmark-init
     color-theme-sanityinc-solarized  ;; Solarized color themes
     color-theme-sanityinc-tomorrow   ;; Tomorrow color themes
+    diminish  ;; Minimize minor mode text in mode line
     dired+ dired-single  ;; Better dired mode
     drag-stuff  ;; Drag lines with C-S-arrow keys, Duplicate with C-S-d
     elfeed ;; Feed reader
@@ -42,7 +43,8 @@
     ;flymake  ;; on the fly code compiling
     fold-dwim  ;; code folding
     goto-last-change  ;; jump to last edit position
-    guide-key  ;; Display prompts for key bindings specified in setup-guide-key.el
+    ;guide-key  ;; Display prompts for key bindings specified in setup-guide-key.el
+    which-key ;; Display prompts for all key bindings
     hardcore-mode  ;; Disable arrow keys and display emacs key bindings instead
     header2  ;; Auto-insert and auto-update headers as defined in setup-header2.el
     helm helm-swoop  ;; Show search results in new buffer (M-i)
@@ -68,9 +70,10 @@
     rainbow-mode  ;; Show color names as the color they represent
     shell-switcher  ;; Better management of multiple shells
     smart-compile  ;; Compile for C programs
-    smart-mode-line  ;; Customize emacs mode line
+    ;smart-mode-line  ;; Customize emacs mode line
     ;smart-parens  ;; Easier parentheses navigation
     smex ;; smart M-x - Supply frequently and recently used commands
+    spaceline ;; modeline from spacemacs
     soft-stone-theme  ;; Soft stone color theme
     stripe-buffer  ;; Use different background colors for even/odd lines in dired mode
     visual-regexp  ;; Visual feedback for regexp (C-c r / C-c q)
@@ -115,7 +118,6 @@
 (require 'setup-projectile)  ;; projectile
 ;;ces (require 'setup-server)  ;; emacs server  ;; ces using emacs --daemon instead
 ;;ces (require 'setup-smart-compile)  ;; smart-compile
-(require 'setup-smart-mode-line)  ;; smart-mode-line
 (require 'setup-smex)  ;; smex
 (require 'setup-stripe-buffer)  ;; stripe-buffer
 (require 'setup-yafolding)
@@ -144,6 +146,10 @@
 (require 'setup-shell)  ;; ces - customize built in shell to behave more like actual terminal
 (require 'setup-registers)
 (require 'setup-flymake)
+(require 'setup-version-control)
+
+;; load this after others b/c it references other minor modes
+(require 'setup-smart-mode-line)  ;; smart-mode-line
 
 
 ;; NOTE: Load below ONLY after loading all the packages
