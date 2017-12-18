@@ -369,12 +369,14 @@
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (when (boundp 'setup-helm-loaded)
+  (global-set-key (kbd "M-x")     'helm-M-x)  ;; commands
   (global-set-key (kbd "C-x C-f") 'helm-find-files)  ;; find-files
   (global-set-key (kbd "C-x b")   'helm-for-files)  ;; switch-to-buffer
   ;(global-set-key (kbd "C-x b")   'persp-helm-for-files)  ;; switch-to-buffer
   (global-set-key (kbd "M-s o")   'helm-occur)  ;; occur
   ;(global-set-key (kbd "C-x k")   'persp-kill-buffer)
   (global-set-key (kbd "C-x f")   'helm-projectile)
+  (define-key helm-map "\t" 'helm-execute-persistent-action)
   )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

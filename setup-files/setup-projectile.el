@@ -1,4 +1,4 @@
-;; Time-stamp: <2017-12-14 10:47:10 cfricano>
+;; Time-stamp: <2017-12-15 13:24:47 cfricano>
 
 ;; Projectile
 ;; Source: https://github.com/bbatsov/projectile
@@ -14,6 +14,7 @@
 
 ; when switching projects, bring up helm buffer list instead of default find file
 (setq projectile-switch-project-action 'helm-projectile)
+;(setq projectile-switch-project-action 'projectile-commander)
 
 ; customize mode line
 ;(eval-after-load "projectile"
@@ -24,9 +25,9 @@
 ;                       "]"))))
 (eval-after-load "projectile"
   '(setq projectile-mode-line
-         '(:eval (list " ["
+         '(:eval (list " [ "
                        (projectile-project-name)
-                       "]"))))
+                       " ]"))))
 
 ; enable everywhere
 (projectile-global-mode)
