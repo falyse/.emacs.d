@@ -1,4 +1,4 @@
-;; Time-stamp: <2017-12-15 13:24:47 cfricano>
+;; Time-stamp: <2017-12-22 09:42:18 cfricano>
 
 ;; Projectile
 ;; Source: https://github.com/bbatsov/projectile
@@ -62,6 +62,11 @@
 ;(require 'persp-projectile)
 ;(persp-mode)
 
+
+; custom project name can be added by putting this code in .dir-locals.el file in projct root
+;((nil . ((projectile-project-name . "my-super-project"))))
+; the following code automatically enables loading of any string lisp in that file
+(put 'projectile-project-name 'safe-local-variable #'stringp)
 
 (setq setup-projectile-loaded t)
 (provide 'setup-projectile)

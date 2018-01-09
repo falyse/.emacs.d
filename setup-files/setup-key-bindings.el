@@ -376,7 +376,13 @@
   (global-set-key (kbd "M-s o")   'helm-occur)  ;; occur
   ;(global-set-key (kbd "C-x k")   'persp-kill-buffer)
   (global-set-key (kbd "C-x f")   'helm-projectile)
-  (define-key helm-map "\t" 'helm-execute-persistent-action)
+  (global-set-key (kbd "M-y")     'helm-show-kill-ring)
+  (global-set-key (kbd "C-c h x") 'helm-register)
+  
+  ;(define-key helm-map "\t" 'helm-execute-persistent-action)
+  (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebind tab to run persistent action
+  (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; make TAB work in terminal
+  (define-key helm-map (kbd "C-z")  'helm-select-action) ; list actions using C-z
   )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
