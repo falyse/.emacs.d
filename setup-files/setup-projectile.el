@@ -1,4 +1,4 @@
-;; Time-stamp: <2017-12-22 09:42:18 cfricano>
+;; Time-stamp: <2018-01-10 09:58:06 cfricano>
 
 ;; Projectile
 ;; Source: https://github.com/bbatsov/projectile
@@ -39,6 +39,10 @@
 (helm-projectile-on)
 
 
+; enable caching to speed things up
+(setq projectile-enable-caching t)
+
+
 ; term integration via term-projectile
 ; override this function to use ansi-term instead of term
 ;(require 'term-projectile)
@@ -63,8 +67,8 @@
 ;(persp-mode)
 
 
-; custom project name can be added by putting this code in .dir-locals.el file in projct root
-;((nil . ((projectile-project-name . "my-super-project"))))
+; custom project name can be added by putting this code in .dir-locals.el file in project root
+;((nil . ((projectile-project-name . "my-custom-project-name"))))
 ; the following code automatically enables loading of any string lisp in that file
 (put 'projectile-project-name 'safe-local-variable #'stringp)
 

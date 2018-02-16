@@ -1,4 +1,4 @@
-;; Time-stamp: <2018-01-09 12:38:30 cfricano>
+;; Time-stamp: <2018-01-25 09:37:11 cfricano>
 
 ;; Org Mode
 
@@ -203,6 +203,7 @@ this with to-do items than with projects or headings."
  '((:name "REFILE"     :tag "REFILE")
    (:name "ADVIP"      :tag "ADVIP")
    (:name "TBG"        :tag "TBG")
+   (:name "Portable Stimulus" :tag "ps")
    (:name "UVM"        :tag "UVM")
    (:name "Yoda"       :tag "yoda")
    (:name "Debug"      :tag "debug")
@@ -213,6 +214,12 @@ this with to-do items than with projects or headings."
 
 (with-eval-after-load 'org-agenda 
   (add-to-list 'org-agenda-prefix-format '(todo . " %l")))
+
+(setq org-agenda-sorting-strategy '(
+                                    (agenda habit-down time-up priority-down category-keep)
+                                    (todo category-keep)
+                                    (tags priority-down category-keep)
+                                    (search category-keep)))
 
 ;;-------------------
 ;; Highlight high priority items
