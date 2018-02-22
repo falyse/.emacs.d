@@ -72,6 +72,10 @@
 ;; use emacs in -nw (no window) mode in tmux if needed without any key binding
 ;; contention.
 
+(global-unset-key (kbd "S-<down-mouse-1>")) ;; bound to `mouse-appearance-menu
+;; by default. This is the same keybinding as highlighting text in tmux
+;; mouse mode, so removing it here allows Shift click select in emacs too.
+(global-set-key (kbd "S-<drag-mouse-1>") `mouse-set-region)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Custom key map: modi-map
