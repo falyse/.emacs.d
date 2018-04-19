@@ -1,8 +1,8 @@
-;; Time-stamp: <2017-12-14 09:00:03 cfricano>
+;; Time-stamp: <2018-04-19 13:16:44 cfricano>
 
 ;; Set up the looks of emacs
 
-(setq default-font-size-pt 10 ;; default font size
+(setq default-font-size-pt 14 ;; default font size
       dark-theme          nil ;; initialize dark-theme var
       )
 
@@ -70,9 +70,9 @@
 ;; Load the theme ONLY after the frame has finished loading (needed especially
 ;; when running emacs in daemon mode)
 ;; Source: https://github.com/Bruce-Connor/smart-mode-line/issues/84#issuecomment-46429893
-(add-to-list 'after-make-frame-functions
-             (lambda (&rest frame)
-               (funcall default-theme)))
+;;cef (add-to-list 'after-make-frame-functions
+;;cef              (lambda (&rest frame)
+;;cef                (funcall default-theme)))
 
 ;;cef (add-hook 'after-init-hook
 
